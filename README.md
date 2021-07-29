@@ -14,6 +14,8 @@ if you are librarian you can make MessagePack (which is a wrapper over Jackson/M
 
 main purpose of Quanta is being the head first solution for efficiency in practice and still reducing complexity as much as possible,
 
+its also mentionable that Quanta is a standalone library, which makes it pretty small compared to other libraries
+
 [comparison benchmark](https://github.com/nort3x/Quanta/blob/main/Benchmark.txt)
 
 ![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")

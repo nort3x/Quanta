@@ -6,31 +6,33 @@ import com.google.gson.Gson;
 import nortex.quanta.serialize.auto.BasicSerializer;
 import nortex.quanta.utils.SexyTimer;
 import org.junit.jupiter.api.Test;
-import org.msgpack.core.MessagePack;
-import org.msgpack.core.MessagePacker;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class SpeedTest {
-
+public class SizeTest {
 
 
 
     // will generate a test result file which can describe over all comparison between serialization methods
     @Test
     void shouldGenerateTestResultFile() throws IOException {
-        TestObject t =  TestObject.randomTestObject();
+        List<TestObject> objects = new ArrayList<>();
+        for (int x = 0; x < 300; x++) {
+            TestObject testObject = TestObject.randomTestObject();
+            objects.add(testObject);
+        }
 
-        List<Long> g_res = gsonTestResult(t,200);
-        List<Long> m_res = messagePackTestResult(t,200);
-        List<Long> q_res = quantaTestResult(t,200);
+        List<Long> g_res = gsonTestResult(objects);
+        List<Long> m_res = messagePackTestResult(objects);
+        List<Long> q_res = quantaTestResult(objects);
 
 
         System.out.println("Gson average: " + g_res.stream().mapToInt(Long::intValue).average().getAsDouble());
@@ -45,61 +47,35 @@ public class SpeedTest {
     }
 
 
-    List<Long> quantaTestResult(TestObject data, int tries) {
+    List<Long> quantaTestResult(List<TestObject> data) {
         BasicSerializer<TestObject> mapper =  new BasicSerializer<>(TestObject.class);
         List<Long> arr = new ArrayList<>();
-        for (int i = 0; i < tries; i++) {
-            arr.add(
-                    SexyTimer.getMean(() -> {
-
-                        byte[] bin = mapper.serialize(data);
-                        TestObject t = mapper.deserialize(bin);
-
-                    }, 1000).getDuration()
-            );
+        for (TestObject datum : data) {
+            arr.add((long) mapper.serialize(datum).length);
         }
         return arr;
     }
 
 
-    List<Long> gsonTestResult(TestObject data, int tries) {
+    List<Long> gsonTestResult(List<TestObject> data) {
         Gson g = new Gson();
         List<Long> arr = new ArrayList<>();
-        for (int i = 0; i < tries; i++) {
-            arr.add(
-                    SexyTimer.getMean(() -> {
-
-                        String s = g.toJson(data);
-                        TestObject t = g.fromJson(s, TestObject.class);
-
-                    }, 1000).getDuration()
-            );
+        for (TestObject datum : data) {
+            arr.add((long) g.toJson(datum).length());
         }
         return arr;
     }
 
 
-    List<Long> messagePackTestResult(TestObject data, int tries) {
+    List<Long> messagePackTestResult(List<TestObject> data) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         List<Long> arr = new ArrayList<>();
-        for (int i = 0; i < tries; i++) {
-            arr.add(
-                    SexyTimer.getMean(() -> {
-
-                        try {
-                            byte[] buff = objectMapper.writeValueAsBytes(data);
-                            TestObject t = objectMapper.readValue(buff, TestObject.class);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    }, 1000).getDuration()
-            );
+        for (TestObject datum : data) {
+            arr.add((long) objectMapper.writeValueAsBytes(datum).length);
         }
         return arr;
     }
-
 
 
 }

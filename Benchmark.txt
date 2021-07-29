@@ -1,0 +1,76 @@
+Experiment selection:
+  Benchmark Methods:   [gsonDeserialize, gsonSerialize, messagePackDeserialize, messagePackSerialize, quantaDeserialize, quantaSerialize]
+  Instruments:   [allocation, runtime]
+  User parameters:   {}
+  Target VMs:  [default@local]
+
+This selection yields 12 experiments.
+
+
+Trial Report (1 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=gsonDeserialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=3200.00, 1st qu.=3200.00, median=3200.00, mean=3200.00, 3rd qu.=3200.00, max=3200.00
+    objects: min=23.00, 1st qu.=23.00, median=23.00, mean=23.00, 3rd qu.=23.00, max=23.00
+Trial Report (2 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=gsonSerialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=3672.00, 1st qu.=3672.00, median=3672.00, mean=3672.00, 3rd qu.=3672.00, max=3672.00
+    objects: min=148.00, 1st qu.=148.00, median=148.00, mean=148.00, 3rd qu.=148.00, max=148.00
+Trial Report (3 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=messagePackSerialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=1784.00, 1st qu.=1784.00, median=1784.00, mean=1784.00, 3rd qu.=1784.00, max=1784.00
+    objects: min=12.00, 1st qu.=12.00, median=12.00, mean=12.00, 3rd qu.=12.00, max=12.00
+Trial Report (4 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=messagePackDeserialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=1208.00, 1st qu.=1208.00, median=1208.00, mean=1208.00, 3rd qu.=1208.00, max=1208.00
+    objects: min=24.00, 1st qu.=24.00, median=24.00, mean=24.00, 3rd qu.=24.00, max=24.00
+Trial Report (5 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=quantaDeserialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=552.00, 1st qu.=552.00, median=552.00, mean=552.00, 3rd qu.=552.00, max=552.00
+    objects: min=20.00, 1st qu.=20.00, median=20.00, mean=20.00, 3rd qu.=20.00, max=20.00
+Trial Report (6 of 12):
+  Experiment {instrument=allocation, benchmarkMethod=quantaSerialize, target=default@local, parameters={}}
+  Results:
+    bytes(B): min=256.00, 1st qu.=256.00, median=256.00, mean=256.00, 3rd qu.=256.00, max=256.00
+    objects: min=11.00, 1st qu.=11.00, median=11.00, mean=11.00, 3rd qu.=11.00, max=11.00
+Trial Report (7 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=gsonDeserialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=11311.73, 1st qu.=11342.76, median=11404.52, mean=11401.27, 3rd qu.=11443.61, max=11497.92
+Trial Report (8 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=gsonSerialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=144048.33, 1st qu.=144701.59, median=145027.90, mean=145208.97, 3rd qu.=145535.26, max=146798.82
+Trial Report (9 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=messagePackDeserialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=2611.18, 1st qu.=2616.45, median=2628.62, mean=2629.13, 3rd qu.=2632.21, max=2664.48
+Trial Report (10 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=messagePackSerialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=2573.24, 1st qu.=2587.29, median=2592.01, mean=2606.69, 3rd qu.=2605.04, max=2677.64
+Trial Report (11 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=quantaDeserialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=1397.78, 1st qu.=1402.57, median=1406.91, mean=1409.99, 3rd qu.=1416.31, max=1427.82
+Trial Report (12 of 12):
+  Experiment {instrument=runtime, benchmarkMethod=quantaSerialize, target=default@local, parameters={}}
+  Results:
+    runtime(ns): min=961.74, 1st qu.=967.47, median=968.85, mean=971.84, 3rd qu.=975.94, max=985.91
+
+
+Collected 162 measurements from:
+  2 instrument(s)
+  2 virtual machine(s)
+  6 benchmark(s)
+
+Execution complete: 2.260 min.
+Some trials failed to upload. Consider uploading them manually.
+
+BUILD SUCCESSFUL in 2m 18s
+3 actionable tasks: 2 executed, 1 up-to-date
+4:13:34 AM: Task execution finished 'MicroBenchMarking.main()'.

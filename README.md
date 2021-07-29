@@ -4,15 +4,20 @@ Quanta is a fast and efficient serializer
 
 
 ```
-Gson average: 78176.66
-MessagePack average: 3372.135
-Quanta average: 1634.745
+Gson average: 51797.09
+MessagePack average: 7578.465
+Quanta average: 3239.465
 ``` 
 measured in nano seconds for a primitive POJO
 
 if you are librarian you can make MessagePack (which is a wrapper over Jackson/Marshal/...) and Gson faster by providing more complex configuration magics but not Quanta!
 
 main purpose of Quanta is being the head first solution for efficiency in practice and still reducing complexity as much as possible,
+
+[comparison benchmark](https://github.com/nort3x/Quanta/blob/main/Benchmark.txt)
+
+![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")
+
 
 
 ## Usage

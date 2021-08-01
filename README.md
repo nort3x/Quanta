@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/nort3x/quanta/badge/main)](https://www.codefactor.io/repository/github/nort3x/quanta/overview/main)
+
 # Quanta
 
 Quanta is a fast and efficient serializer

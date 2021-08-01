@@ -48,7 +48,7 @@ public class BasicSerializer<T> {
     public T deserialize(byte[] arr) {
         Deserializer d = new Deserializer(arr);
         try {
-            T t = clazz.newInstance();;
+            T t = clazz.newInstance();
             deSerializerMap.forEach((x,y)->{
                 y.accept(d,t);
             });

@@ -75,7 +75,7 @@ public class Converters {
 
 
     public static float bytesToFloat32BigEndian(byte[] arr) {
-        return Float.intBitsToFloat((int) bytesToInt32BigEndian(arr));
+        return Float.intBitsToFloat(bytesToInt32BigEndian(arr));
     }
 
     public static byte[] float32ToBytesBigEndian(float l) {

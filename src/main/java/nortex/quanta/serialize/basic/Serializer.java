@@ -1,6 +1,6 @@
 package nortex.quanta.serialize.basic;
 
-import nortex.quanta.legecySupport.Function;
+import nortex.quanta.legacy_support.Function;
 import nortex.quanta.utils.Converters;
 
 import java.io.ByteArrayOutputStream;
@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream;
  */
 final public class Serializer {
 
-    private ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
     public synchronized void writeByte(byte b) {
         bos.write(b);
@@ -33,21 +33,21 @@ final public class Serializer {
     }
 
     public synchronized void writeInt32(int i) {
-        bos.writeBytes(Converters.int32ToBytesBigEndian(i));
+        bos.write(Converters.int32ToBytesBigEndian(i),0,4);
     }
 
     public synchronized void writeInt64(long i) {
-        bos.writeBytes(Converters.int64ToBytesBigEndian(i));
+        bos.write(Converters.int64ToBytesBigEndian(i),0,8);
     }
 
 
     public synchronized void writeFloat32(float i) {
-        bos.writeBytes(Converters.float32ToBytesBigEndian(i));
+        bos.write(Converters.float32ToBytesBigEndian(i),0,4);
     }
 
 
     public synchronized void writeFloat64(double i) {
-        bos.writeBytes(Converters.float64ToBytesBigEndian(i));
+        bos.write(Converters.float64ToBytesBigEndian(i),0,8);
     }
 
 
@@ -56,7 +56,7 @@ final public class Serializer {
             writeInt32(0);
         } else {
             writeInt32(arr.length);
-            bos.writeBytes(arr);
+            bos.write(arr,0,arr.length);
         }
     }
 

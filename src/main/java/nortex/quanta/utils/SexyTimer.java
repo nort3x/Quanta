@@ -75,7 +75,6 @@ public class SexyTimer {
      * @param runnable     runnable to measure
      * @param numberOfRuns iterations for sample
      * @return mean duration for each run
-     * @apiNote read this Timer Once!
      */
     public static SexyTimer getMean(Runnable runnable, int numberOfRuns) {
         SexyTimer sexyTimer = new SexyTimer("MeanMeasure");

@@ -1,6 +1,6 @@
 package nortex.quanta.serialize.basic;
 
-import nortex.quanta.legecySupport.Function;
+import nortex.quanta.legacy_support.Function;
 import nortex.quanta.utils.Converters;
 
 import java.io.ByteArrayInputStream;
@@ -10,7 +10,7 @@ import java.lang.reflect.Array;
  * <h2>
  * Deserializer
  * </h2>
- * this class will `unpack` data from binary format please do not use this for conversions!<br/>
+ * this class will `unpack` data from binary format please do not use this for conversions!<a></a>
  * unpacking is sequential meaning that you have to read the data in the same order you packed it
  *
  * @see Serializer
@@ -40,30 +40,22 @@ final public class Deserializer {
     }
 
     public synchronized int readInt32() {
-        byte[] buff = new byte[4];
-        bis.readNBytes(buff, 0, buff.length);
-        return (int) Converters.bytesToInt32BigEndian(buff);
+        return Converters.bytesToInt32BigEndian(readNBytes(4));
     }
 
 
     public synchronized long readInt64() {
-        byte[] buff = new byte[8];
-        bis.readNBytes(buff, 0, buff.length);
-        return Converters.bytesToInt64BigEndian(buff);
+        return Converters.bytesToInt64BigEndian(readNBytes(8));
     }
 
 
     public synchronized float readFloat32() {
-        byte[] buff = new byte[4];
-        bis.readNBytes(buff, 0, buff.length);
-        return Converters.bytesToFloat32BigEndian(buff);
+        return Converters.bytesToFloat32BigEndian(readNBytes(4));
     }
 
 
     public synchronized double readFloat64() {
-        byte[] buff = new byte[8];
-        bis.readNBytes(buff, 0, buff.length);
-        return Converters.bytesToFloat64BigEndian(buff);
+        return Converters.bytesToFloat64BigEndian(readNBytes(8));
     }
 
 
@@ -71,9 +63,7 @@ final public class Deserializer {
         int i = readInt32();
         if (i == 0)
             return null;
-        byte[] buff = new byte[i];
-        bis.readNBytes(buff, 0, buff.length);
-        return buff;
+        return readNBytes(i);
     }
 
     public synchronized String readString() {
@@ -109,4 +99,9 @@ final public class Deserializer {
         return readObjectArray(String::new,String.class);
     }
 
+    byte[] readNBytes(int n){
+        byte[] arr = new byte[n];
+        bis.read(arr,0,n); // dont check :) and copy just believe
+        return arr;
+    }
 }

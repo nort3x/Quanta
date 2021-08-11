@@ -1,6 +1,6 @@
 package nortex.quanta.serialize.auto;
 
-import nortex.quanta.legecySupport.BiConsumer;
+import nortex.quanta.legacy_support.BiConsumer;
 import nortex.quanta.serialize.basic.Deserializer;
 import nortex.quanta.serialize.basic.Serializer;
 
@@ -26,7 +26,7 @@ public class BasicSerializer<T> {
     }
 
 
-    private List<Field> fields;
+    private final List<Field> fields;
     Map<Field, BiConsumer<Serializer,Object>> serializerMap;
     Map<Field, BiConsumer<Deserializer,Object>> deSerializerMap;
     Class<T> clazz;
@@ -48,7 +48,7 @@ public class BasicSerializer<T> {
     public T deserialize(byte[] arr) {
         Deserializer d = new Deserializer(arr);
         try {
-            T t = clazz.newInstance();;
+            T t = clazz.newInstance();
             deSerializerMap.forEach((x,y)->{
                 y.accept(d,t);
             });

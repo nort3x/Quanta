@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/nort3x/quanta/badge/main)](https://www.codefactor.io/repository/github/nort3x/quanta/overview/main)
+
 # Quanta
 
 Quanta is a fast and efficient serializer
@@ -66,6 +68,7 @@ double aDouble = d.readFloat64();
 + fine tuning algorithms
 + giving it structure
 + adding cross language support
+
 
 
 ## Contributing

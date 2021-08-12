@@ -1,5 +1,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/nort3x/quanta/badge/main)](https://www.codefactor.io/repository/github/nort3x/quanta/overview/main)
-
+[![](https://jitpack.io/v/nort3x/Quanta.svg)](https://jitpack.io/#nort3x/Quanta)
 # Quanta
 
 Quanta is a fast and efficient serializer
@@ -22,7 +22,50 @@ its also mentionable that Quanta is a standalone library, which makes it pretty 
 
 ![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")
 
+## Integrate
 
+
+### maven
+
+Step 1. Add the JitPack repository to your build file
+```xml
+<repositories>
+  <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+Step 2. Add the dependency
+```xml
+<dependency>
+    <groupId>com.github.nort3x</groupId>
+    <artifactId>Quanta</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+
+### gradle
+
+Step 1. Add the JitPack repository to your build file
+
+
+Add it in your root build.gradle at the end of repositories:
+```gradle
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+Step 2. Add the dependency
+```gradle
+dependencies {
+        implementation 'com.github.nort3x:Quanta:1.0.0'
+}
+```
 
 ## Usage
 ```java

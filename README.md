@@ -1,4 +1,5 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/nort3x/quanta/badge/main)](https://www.codefactor.io/repository/github/nort3x/quanta/overview/main)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/nort3x/Quanta.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nort3x/Quanta/alerts/)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/nort3x/Quanta.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nort3x/Quanta/context:java)
 [![](https://jitpack.io/v/nort3x/Quanta.svg)](https://jitpack.io/#nort3x/Quanta)
 # Quanta
 

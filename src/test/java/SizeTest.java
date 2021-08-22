@@ -3,19 +3,14 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import nortex.quanta.serialize.auto.BasicSerializer;
-import nortex.quanta.utils.SexyTimer;
+import me.nort3x.quanta.pub.auto.SimpleSerializer;
 import org.junit.jupiter.api.Test;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class SizeTest {
 
@@ -48,7 +43,7 @@ public class SizeTest {
 
 
     List<Long> quantaTestResult(List<TestObject> data) {
-        BasicSerializer<TestObject> mapper =  new BasicSerializer<>(TestObject.class);
+        SimpleSerializer<TestObject> mapper =  new SimpleSerializer<>(TestObject.class);
         List<Long> arr = new ArrayList<>();
         for (TestObject datum : data) {
             arr.add((long) mapper.serialize(datum).length);

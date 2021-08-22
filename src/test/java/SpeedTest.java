@@ -1,22 +1,16 @@
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import nortex.quanta.serialize.auto.BasicSerializer;
-import nortex.quanta.utils.SexyTimer;
+import me.nort3x.quanta.pub.auto.SimpleSerializer;
+import me.nort3x.quanta.internal.utils.SexyTimer;
 import org.junit.jupiter.api.Test;
-import org.msgpack.core.MessagePack;
-import org.msgpack.core.MessagePacker;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class SpeedTest {
 
@@ -46,7 +40,7 @@ public class SpeedTest {
 
 
     List<Long> quantaTestResult(TestObject data, int tries) {
-        BasicSerializer<TestObject> mapper =  new BasicSerializer<>(TestObject.class);
+        SimpleSerializer<TestObject> mapper =  new SimpleSerializer<>(TestObject.class);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(

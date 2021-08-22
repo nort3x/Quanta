@@ -1,5 +1,4 @@
-import nortex.quanta.serialize.auto.BasicSerializer;
-import com.google.gson.Gson;
+import me.nort3x.quanta.pub.auto.SimpleSerializer;
 import org.junit.jupiter.api.Test;
 
 public class SerializationTest {
@@ -26,7 +25,7 @@ public class SerializationTest {
         f.i = 2;
         f.s = "hellow";
 
-        BasicSerializer<TestOBJ> serializer = new BasicSerializer<>(TestOBJ.class);
+        SimpleSerializer<TestOBJ> serializer = new SimpleSerializer<>(TestOBJ.class);
 
         byte[] arr = serializer.serialize(f);
         TestOBJ q = serializer.deserialize(arr);

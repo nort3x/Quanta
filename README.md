@@ -113,7 +113,8 @@ double aDouble = d.readFloat64();
 + giving it structure
 + adding cross language support
 
-
+## Donation
+if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you dont smoke yourself i dont expect anything
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

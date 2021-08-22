@@ -113,7 +113,7 @@ final public class Deserializer {
         int i = readInt32();
         int[] objects = new int[i];
         for (int j = 0; j < i; j++) {
-            objects[j] = readObject(Converters::bytesToInt32BigEndian);
+            objects[j] = readInt32();
         }
         return objects;
     }
@@ -123,7 +123,54 @@ final public class Deserializer {
      * @throws RuntimeException if array is truncated and was not able to provide requested length
      */
     public synchronized String[] readStringArray(){
-        return readObjectArray(String::new);
+        Object[] o = readObjectArray(String::new);
+        return (String[])o;
+    }
+
+
+    public synchronized long[] readInt64Array(){
+        int i = readInt32();
+        long[] objects = new long[i];
+        for (int j = 0; j < i; j++) {
+            objects[j] = readInt64();
+        }
+        return objects;
+    }
+
+    public synchronized boolean[] readBoolArray(){
+        int i = readInt32();
+        boolean[] objects = new boolean[i];
+        for (int j = 0; j < i; j++) {
+            objects[j] = readBool();
+        }
+        return objects;
+    }
+
+    public synchronized float[] readFloat32Array(){
+        int i = readInt32();
+        float[] objects = new float[i];
+        for (int j = 0; j < i; j++) {
+            objects[j] = readFloat32();
+        }
+        return objects;
+    }
+
+    public synchronized double[] readFloat64Array(){
+        int i = readInt32();
+        double[] objects = new double[i];
+        for (int j = 0; j < i; j++) {
+            objects[j] = readFloat64();
+        }
+        return objects;
+    }
+
+    public synchronized byte[][] readByteArrayArray(){
+        int i = readInt32();
+        byte[][] objects = new byte[i][];
+        for (int j = 0; j < i; j++) {
+            objects[j] = readByteArray();
+        }
+        return objects;
     }
 
     /**

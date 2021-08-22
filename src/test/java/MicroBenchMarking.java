@@ -8,6 +8,7 @@ import com.google.caliper.runner.CaliperMain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.nort3x.quanta.pub.auto.SimpleSerializer;
+import me.nort3x.quanta.pub.auto.SmarterSerializer;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ public class MicroBenchMarking {
     public static class BenchMarkTime {
 
         SimpleSerializer<TestObject> quanta;
+        SmarterSerializer<TestObject> quanta2;
+
         TestObject randomObject;
         Gson gson;
         ObjectMapper messagepk;
@@ -29,8 +32,8 @@ public class MicroBenchMarking {
             randomObject = TestObject.randomTestObject();
 
 
-
             quanta = new SimpleSerializer<>(TestObject.class);
+            quanta2 = new SmarterSerializer<>(TestObject.class);
 
             gson = new GsonBuilder().create();
 
@@ -43,6 +46,13 @@ public class MicroBenchMarking {
 
 
         }
+
+        @Benchmark
+        public void quanta2Serialize(int reps) {
+            for (int i = 0; i < reps; i++)
+                quantaSerialized = quanta2.serialize(randomObject);
+        }
+
 
         @Benchmark
         public void quantaSerialize(int reps) {
@@ -63,6 +73,12 @@ public class MicroBenchMarking {
         public void gsonDeserialize(int reps) {
             for (int i = 0; i < reps; i++)
                 gson.fromJson(gsonSerialized,TestObject.class);
+        }
+
+        @Benchmark
+        public void quanta2Deserialize(int reps) {
+            for (int i = 0; i < reps; i++)
+                quanta2.deserialize(quantaSerialized);
         }
 
         @Benchmark

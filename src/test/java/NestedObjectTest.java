@@ -1,4 +1,4 @@
-import me.nort3x.quanta.pub.auto.NestedSerializer;
+import me.nort3x.quanta.pub.auto.SmarterSerializer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +11,14 @@ public class NestedObjectTest {
    public static class N1{
         public int a;
         String b;
-        N2 c2;
+        N2 c;
         String d;
         public N1() {
         }
         public N1(int i, String s, N2 n2, String end) {
             this.a = i;
             this.b = s;
-            this.c2 = n2;
+            this.c = n2;
             this.d = end;
         }
         @Override
@@ -26,7 +26,7 @@ public class NestedObjectTest {
             if (this == o) return true;
             if (!(o instanceof N1)) return false;
             N1 n1 = (N1) o;
-            return a == n1.a && Objects.equals(b, n1.b) && Objects.equals(c2, n1.c2) && Objects.equals(d, n1.d);
+            return a == n1.a && Objects.equals(b, n1.b) && Objects.equals(c, n1.c) && Objects.equals(d, n1.d);
         }
 
     }
@@ -53,8 +53,7 @@ public class NestedObjectTest {
 
     @Test
     void shouldSerializeAndDeserializeNestedObjects() throws IOException, NoSuchFieldException {
-        NestedSerializer<N1> t1 = NestedSerializer.of(N1.class);
-
+        SmarterSerializer<N1> t1 = new SmarterSerializer<>(N1.class);
         N2 n2 = new N2("nort3x");
         N1 n1 = new N1(1,"start",n2,"end");
 

@@ -22,7 +22,7 @@ public class ManualSerialization {
         s.writeInt32(20);
         s.writeInt64(200);
         s.writeStringArray("1,2,3,4".split(","));
-        s.writeIntArray(new int[]{1, 2, 3, 4});
+        s.writeInt32Array(new int[]{1, 2, 3, 4});
 
         // s.writeObject(YourObject,YourConverter);  // just to introduce API
         // s.writeObjectArray(YourObject,YourConverter);

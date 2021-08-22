@@ -60,6 +60,10 @@ final public class Serializer {
         }
     }
 
+    public synchronized <T> void writeObject(T o, Function<T,byte[]> convertor){
+        writeByteArray(convertor.apply(o));
+    }
+
     public synchronized void writeString(String s) {
         if (s == null) {
             writeByteArray(null);
@@ -68,9 +72,6 @@ final public class Serializer {
         writeByteArray(s.getBytes());
     }
 
-    public synchronized <T> void writeObject(T o, Function<T,byte[]> convertor){
-        writeByteArray(convertor.apply(o));
-    }
     public synchronized <T> void writeObjectArray(T[] os,Function<T,byte[]> convertor){
         writeInt32(os.length);
         for (T t:
@@ -79,11 +80,46 @@ final public class Serializer {
         }
     }
 
-    public synchronized void writeIntArray(int[] arr){
+    public synchronized void writeInt32Array(int[] arr){
         writeInt32(arr.length);
         for (int i :
                 arr) {
-            writeObject(i,Converters::int32ToBytesBigEndian);
+            writeInt32(i);
+        }
+    }
+
+    public synchronized void writeInt64Array(long[] arr){
+        writeInt32(arr.length);
+        for (long l : arr) {
+            writeInt64(l);
+        }
+    }
+
+    public synchronized void writeBoolArray(boolean[] arr){
+        writeInt32(arr.length);
+        for (boolean b : arr) {
+            writeBool(b);
+        }
+    }
+
+    public synchronized void writeFloat32Array(float[] arr){
+        writeInt32(arr.length);
+        for (float f : arr) {
+            writeFloat32(f);
+        }
+    }
+
+    public synchronized void writeFloat64Array(double[] arr){
+        writeInt32(arr.length);
+        for (double d : arr) {
+            writeFloat64(d);
+        }
+    }
+
+    public synchronized void writeByteArrayArray(byte[][] arr){
+        writeInt32(arr.length);
+        for (byte[] bytes : arr) {
+            writeByteArray(bytes);
         }
     }
 

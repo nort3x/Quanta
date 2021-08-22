@@ -3,6 +3,7 @@ package me.nort3x.quanta.pub.auto;
 import me.nort3x.quanta.internal.auto.Scanner;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
+import me.nort3x.quanta.pub.interfaces.BinaryConverter;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class SimpleSerializer<T> {
+public class SimpleSerializer<T> implements BinaryConverter<T> {
 
     private static final String booleanType,int32Type,int64Type,byteType,float32Type,float64Type, stringType,byteArrayType,intArrayType,stringArrayType;
     static{
@@ -38,6 +39,7 @@ public class SimpleSerializer<T> {
         this.clazz = clazz;
     }
 
+    @Override
     public byte[] serialize(T t){
         Serializer s = new Serializer();
         serializerMap.forEach((x,y)->{
@@ -46,6 +48,7 @@ public class SimpleSerializer<T> {
         return s.toArray();
     }
 
+    @Override
     public T deserialize(byte[] arr) {
         Deserializer d = new Deserializer(arr);
         try {
@@ -143,7 +146,7 @@ public class SimpleSerializer<T> {
             else if(name.equals(intArrayType))
                 serialMap.put(f,(x,y)->{
                     try {
-                        x.writeIntArray((int[]) f.get(y));
+                        x.writeInt32Array((int[]) f.get(y));
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }

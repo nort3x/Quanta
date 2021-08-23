@@ -1,3 +1,4 @@
+import TestObjects.TestObjectOfPrimitives;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,10 +20,10 @@ public class SizeTest {
     // will generate a test result file which can describe over all comparison between serialization methods
     @Test
     void shouldGenerateTestResultFile() throws IOException {
-        List<TestObject> objects = new ArrayList<>();
+        List<TestObjectOfPrimitives> objects = new ArrayList<>();
         for (int x = 0; x < 300; x++) {
-            TestObject testObject = TestObject.randomTestObject();
-            objects.add(testObject);
+            TestObjectOfPrimitives testObjectOfPrimitives = TestObjectOfPrimitives.randomTestObject();
+            objects.add(testObjectOfPrimitives);
         }
 
         List<Long> g_res = gsonTestResult(objects);
@@ -42,31 +43,31 @@ public class SizeTest {
     }
 
 
-    List<Long> quantaTestResult(List<TestObject> data) {
-        PrimitiveConvertor<TestObject> mapper =  new PrimitiveConvertor<>(TestObject.class);
+    List<Long> quantaTestResult(List<TestObjectOfPrimitives> data) {
+        PrimitiveConvertor<TestObjectOfPrimitives> mapper =  new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
-        for (TestObject datum : data) {
+        for (TestObjectOfPrimitives datum : data) {
             arr.add((long) mapper.serialize(datum).length);
         }
         return arr;
     }
 
 
-    List<Long> gsonTestResult(List<TestObject> data) {
+    List<Long> gsonTestResult(List<TestObjectOfPrimitives> data) {
         Gson g = new Gson();
         List<Long> arr = new ArrayList<>();
-        for (TestObject datum : data) {
+        for (TestObjectOfPrimitives datum : data) {
             arr.add((long) g.toJson(datum).length());
         }
         return arr;
     }
 
 
-    List<Long> messagePackTestResult(List<TestObject> data) throws JsonProcessingException {
+    List<Long> messagePackTestResult(List<TestObjectOfPrimitives> data) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         List<Long> arr = new ArrayList<>();
-        for (TestObject datum : data) {
+        for (TestObjectOfPrimitives datum : data) {
             arr.add((long) objectMapper.writeValueAsBytes(datum).length);
         }
         return arr;

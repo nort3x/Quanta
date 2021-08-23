@@ -59,10 +59,17 @@ public class BinaryHeadStore {
 
 
     static Map<Class<?>,BinaryHead> customTypesBinaryHeads = new ConcurrentHashMap<>();
+    static Map<Class<?>,BinaryHead> customArrayTypesBinaryHeads = new ConcurrentHashMap<>();
 
     public static BinaryHead getBinaryHeadOf(Class<?> type){
         if(primitiveHeads.containsKey(type))
             return primitiveHeads.get(type);
+        else if(type.isArray()){
+            return customArrayTypesBinaryHeads.computeIfAbsent(type, givenArrayType->{
+               Class<?> elemenet_type =  type.getComponentType();
+               return new CustomArrayTypeConverter(getBinaryHeadOf(elemenet_type),elemenet_type);
+            });
+        }
         else
             return customTypesBinaryHeads.computeIfAbsent(type, CustomTypeConverter::new);
     }

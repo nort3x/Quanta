@@ -3,6 +3,7 @@ package me.nort3x.quanta.pub.basic;
 import me.nort3x.quanta.internal.utils.Converters;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Collection;
 import java.util.function.Function;
 
 /**

@@ -1,3 +1,4 @@
+import TestObjects.TestObjectOfPrimitives;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,10 +17,10 @@ import java.io.IOException;
 public class MicroBenchMarking {
     public static class BenchMarkTime {
 
-        PrimitiveConvertor<TestObject> quanta;
-        NestedConvertor<TestObject> quanta2;
+        PrimitiveConvertor<TestObjectOfPrimitives> quanta;
+        NestedConvertor<TestObjectOfPrimitives> quanta2;
 
-        TestObject randomObject;
+        TestObjectOfPrimitives randomObject;
         Gson gson;
         ObjectMapper messagepk;
 
@@ -29,11 +30,11 @@ public class MicroBenchMarking {
 
         @BeforeExperiment
         protected void setUp() throws JsonProcessingException {
-            randomObject = TestObject.randomTestObject();
+            randomObject = TestObjectOfPrimitives.randomTestObject();
 
 
-            quanta = new PrimitiveConvertor<>(TestObject.class);
-            quanta2 = new NestedConvertor<>(TestObject.class);
+            quanta = new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
+            quanta2 = new NestedConvertor<>(TestObjectOfPrimitives.class);
 
             gson = new GsonBuilder().create();
 
@@ -72,7 +73,7 @@ public class MicroBenchMarking {
         @Benchmark
         public void gsonDeserialize(int reps) {
             for (int i = 0; i < reps; i++)
-                gson.fromJson(gsonSerialized,TestObject.class);
+                gson.fromJson(gsonSerialized, TestObjectOfPrimitives.class);
         }
 
         @Benchmark
@@ -91,7 +92,7 @@ public class MicroBenchMarking {
         public void messagePackDeserialize(int reps) throws IOException {
 
             for (int i = 0; i < reps; i++)
-                messagepk.readValue(msgpkSerialized,TestObject.class);
+                messagepk.readValue(msgpkSerialized, TestObjectOfPrimitives.class);
 
         }
 

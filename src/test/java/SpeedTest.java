@@ -1,3 +1,4 @@
+import TestObjects.TestObjectOfPrimitives;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,7 @@ public class SpeedTest {
     // will generate a test result file which can describe over all comparison between serialization methods
     @Test
     void shouldGenerateTestResultFile() throws IOException {
-        TestObject t =  TestObject.randomTestObject();
+        TestObjectOfPrimitives t =  TestObjectOfPrimitives.randomTestObject();
 
         List<Long> g_res = gsonTestResult(t,200);
         List<Long> m_res = messagePackTestResult(t,200);
@@ -39,15 +40,15 @@ public class SpeedTest {
     }
 
 
-    List<Long> quantaTestResult(TestObject data, int tries) {
-        PrimitiveConvertor<TestObject> mapper =  new PrimitiveConvertor<>(TestObject.class);
+    List<Long> quantaTestResult(TestObjectOfPrimitives data, int tries) {
+        PrimitiveConvertor<TestObjectOfPrimitives> mapper =  new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(
                     SexyTimer.getMean(() -> {
 
                         byte[] bin = mapper.serialize(data);
-                        TestObject t = mapper.deserialize(bin);
+                        TestObjectOfPrimitives t = mapper.deserialize(bin);
 
                     }, 1000).getDuration()
             );
@@ -56,7 +57,7 @@ public class SpeedTest {
     }
 
 
-    List<Long> gsonTestResult(TestObject data, int tries) {
+    List<Long> gsonTestResult(TestObjectOfPrimitives data, int tries) {
         Gson g = new Gson();
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
@@ -64,7 +65,7 @@ public class SpeedTest {
                     SexyTimer.getMean(() -> {
 
                         String s = g.toJson(data);
-                        TestObject t = g.fromJson(s, TestObject.class);
+                        TestObjectOfPrimitives t = g.fromJson(s, TestObjectOfPrimitives.class);
 
                     }, 1000).getDuration()
             );
@@ -73,7 +74,7 @@ public class SpeedTest {
     }
 
 
-    List<Long> messagePackTestResult(TestObject data, int tries) {
+    List<Long> messagePackTestResult(TestObjectOfPrimitives data, int tries) {
         ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         List<Long> arr = new ArrayList<>();
@@ -83,7 +84,7 @@ public class SpeedTest {
 
                         try {
                             byte[] buff = objectMapper.writeValueAsBytes(data);
-                            TestObject t = objectMapper.readValue(buff, TestObject.class);
+                            TestObjectOfPrimitives t = objectMapper.readValue(buff, TestObjectOfPrimitives.class);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

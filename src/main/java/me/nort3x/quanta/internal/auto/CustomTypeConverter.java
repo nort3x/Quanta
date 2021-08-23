@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class CustomTypeConverter implements BinaryHead {
 
@@ -28,6 +27,9 @@ public class CustomTypeConverter implements BinaryHead {
 
     }
 
+    protected Class<?> getType(){
+        return type;
+    }
 
     @Override
     public void readAndSet(Deserializer ds, Field f, Object o) throws IllegalAccessException {

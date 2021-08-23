@@ -1,12 +1,10 @@
 package me.nort3x.quanta.internal.utils;
 
 public class TestUtils {
-    public static String bytesToHex(byte[] hash) {
+    public static String bytesToHex(byte[] bytes) {
         StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) hexString.append('0');
-            hexString.append(hex);
+        for (byte b : bytes) {
+            hexString.append(String.format("%02X ", b));
         }
         return hexString.toString().toUpperCase();
     }

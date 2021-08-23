@@ -1,13 +1,12 @@
 package me.nort3x.quanta.internal.auto;
 
-import me.nort3x.quanta.internal.basics.arrays.*;
-import me.nort3x.quanta.internal.basics.arrays.objects.BooleanArrayBinaryHead;
+import me.nort3x.quanta.internal.basics.arrays.duals.*;
+import me.nort3x.quanta.internal.basics.arrays.objects.StringArrayBinaryHead;
+import me.nort3x.quanta.internal.basics.arrays.objects.StringBinaryHead;
+import me.nort3x.quanta.internal.basics.arrays.primitives.*;
 import me.nort3x.quanta.internal.basics.primitives.*;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
-import me.nort3x.quanta.pub.basic.Deserializer;
-import me.nort3x.quanta.pub.basic.Serializer;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,19 +35,25 @@ public class BinaryHeadStore {
 
         // array heads
         put(String.class,new StringBinaryHead());
+        put(String[].class,new StringArrayBinaryHead());
 
         put(byte[].class,new ByteArrayBinaryHead());
+        put(Byte[].class,new ByteArrayBinaryHeadDual());
 
         put(boolean[].class,new BoolArrayBinaryHead());
         put(Boolean[].class,new BooleanArrayBinaryHead()); //todo for the everything else
 
         put(float[].class, new Float32ArrayBinaryHead());
+        put(Float[].class,new Float32ArrayBinaryHeadDual());
 
         put(double[].class,new Float64ArrayBinaryHead());
+        put(Double[].class,new Float64ArrayBinaryHeadDual());
 
         put(int[].class,new Int32ArrayBinaryHead());
+        put(Integer[].class,new Int32ArrayBinaryHeadDual());
 
         put(long[].class,new Int64ArrayBinaryHead());
+        put(Long[].class,new Int64ArrayBinaryHeadDual());
 
     }};
 

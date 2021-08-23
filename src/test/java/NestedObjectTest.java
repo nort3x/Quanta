@@ -1,4 +1,4 @@
-import me.nort3x.quanta.pub.auto.SmarterSerializer;
+import me.nort3x.quanta.pub.auto.NestedConvertor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +53,7 @@ public class NestedObjectTest {
 
     @Test
     void shouldSerializeAndDeserializeNestedObjects() throws IOException, NoSuchFieldException {
-        SmarterSerializer<N1> t1 = new SmarterSerializer<>(N1.class);
+        NestedConvertor<N1> t1 = new NestedConvertor<>(N1.class);
         N2 n2 = new N2("nort3x");
         N1 n1 = new N1(1,"start",n2,"end");
 

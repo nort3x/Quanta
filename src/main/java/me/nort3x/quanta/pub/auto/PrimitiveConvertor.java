@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class SimpleSerializer<T> implements BinaryConverter<T> {
+public class PrimitiveConvertor<T> implements BinaryConverter<T> {
 
     private static final String booleanType,int32Type,int64Type,byteType,float32Type,float64Type, stringType,byteArrayType,intArrayType,stringArrayType;
     static{
@@ -32,7 +32,7 @@ public class SimpleSerializer<T> implements BinaryConverter<T> {
     Map<Field, BiConsumer<Serializer,Object>> serializerMap;
     Map<Field, BiConsumer<Deserializer,Object>> deSerializerMap;
     Class<T> clazz;
-    public SimpleSerializer(Class<T> clazz){
+    public PrimitiveConvertor(Class<T> clazz){
         fields = Scanner.getFields(clazz);
         serializerMap = mapSerialFunctions(fields);
         deSerializerMap = mapDeSerialFunctions(fields);

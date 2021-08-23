@@ -7,8 +7,8 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.runner.CaliperMain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import me.nort3x.quanta.pub.auto.SimpleSerializer;
-import me.nort3x.quanta.pub.auto.SmarterSerializer;
+import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
+import me.nort3x.quanta.pub.auto.NestedConvertor;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import java.io.IOException;
@@ -16,14 +16,14 @@ import java.io.IOException;
 public class MicroBenchMarking {
     public static class BenchMarkTime {
 
-        SimpleSerializer<TestObject> quanta;
-        SmarterSerializer<TestObject> quanta2;
+        PrimitiveConvertor<TestObject> quanta;
+        NestedConvertor<TestObject> quanta2;
 
         TestObject randomObject;
         Gson gson;
         ObjectMapper messagepk;
 
-        byte[] quantaSerialized, msgpkSerialized;
+        byte[] quantaSerialized, msgpkSerialized,quantaSerialized2;
         String gsonSerialized;
 
 
@@ -32,8 +32,8 @@ public class MicroBenchMarking {
             randomObject = TestObject.randomTestObject();
 
 
-            quanta = new SimpleSerializer<>(TestObject.class);
-            quanta2 = new SmarterSerializer<>(TestObject.class);
+            quanta = new PrimitiveConvertor<>(TestObject.class);
+            quanta2 = new NestedConvertor<>(TestObject.class);
 
             gson = new GsonBuilder().create();
 
@@ -43,7 +43,7 @@ public class MicroBenchMarking {
             gsonSerialized = gson.toJson(randomObject);
             msgpkSerialized = messagepk.writeValueAsBytes(randomObject);
             quantaSerialized = quanta.serialize(randomObject);
-
+            quantaSerialized2 = quanta2.serialize(randomObject);
 
         }
 
@@ -78,7 +78,7 @@ public class MicroBenchMarking {
         @Benchmark
         public void quanta2Deserialize(int reps) {
             for (int i = 0; i < reps; i++)
-                quanta2.deserialize(quantaSerialized);
+                quanta2.deserialize(quantaSerialized2);
         }
 
         @Benchmark

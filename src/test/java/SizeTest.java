@@ -3,7 +3,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import me.nort3x.quanta.pub.auto.SimpleSerializer;
+import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
 import org.junit.jupiter.api.Test;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
@@ -43,7 +43,7 @@ public class SizeTest {
 
 
     List<Long> quantaTestResult(List<TestObject> data) {
-        SimpleSerializer<TestObject> mapper =  new SimpleSerializer<>(TestObject.class);
+        PrimitiveConvertor<TestObject> mapper =  new PrimitiveConvertor<>(TestObject.class);
         List<Long> arr = new ArrayList<>();
         for (TestObject datum : data) {
             arr.add((long) mapper.serialize(datum).length);

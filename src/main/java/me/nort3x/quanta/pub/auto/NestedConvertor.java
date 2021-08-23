@@ -9,7 +9,7 @@ import me.nort3x.quanta.pub.interfaces.BinaryConverter;
 
 import java.lang.reflect.Field;
 
-public class SmarterSerializer<T> implements BinaryConverter<T> {
+public class NestedConvertor<T> implements BinaryConverter<T> {
     BinaryHead typeBH;
     static Field dummyClassField;
 
@@ -21,7 +21,7 @@ public class SmarterSerializer<T> implements BinaryConverter<T> {
         }
     }
 
-    public SmarterSerializer(Class<?> type) {
+    public NestedConvertor(Class<?> type) {
         typeBH = BinaryHeadStore.getBinaryHeadOf(type);
     }
 

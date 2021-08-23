@@ -2,7 +2,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import me.nort3x.quanta.pub.auto.SimpleSerializer;
+import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
 import me.nort3x.quanta.internal.utils.SexyTimer;
 import org.junit.jupiter.api.Test;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
@@ -40,7 +40,7 @@ public class SpeedTest {
 
 
     List<Long> quantaTestResult(TestObject data, int tries) {
-        SimpleSerializer<TestObject> mapper =  new SimpleSerializer<>(TestObject.class);
+        PrimitiveConvertor<TestObject> mapper =  new PrimitiveConvertor<>(TestObject.class);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(

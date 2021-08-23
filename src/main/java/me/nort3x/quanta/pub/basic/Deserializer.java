@@ -3,6 +3,7 @@ package me.nort3x.quanta.pub.basic;
 import me.nort3x.quanta.internal.utils.Converters;
 
 import java.io.ByteArrayInputStream;
+import java.lang.reflect.Array;
 import java.util.function.Function;
 
 /**
@@ -12,9 +13,9 @@ import java.util.function.Function;
  * this class will `unpack` data from binary format please do not use this for conversions!<a></a>
  * unpacking is sequential meaning that you have to read the data in the same order you packed it
  *
+ * @author H.ardaki
  * @see Serializer
  * @see Converters
- * @author H.ardaki
  */
 final public class Deserializer {
 
@@ -75,33 +76,38 @@ final public class Deserializer {
      * @throws RuntimeException if String is truncated and was not able to provide requested length
      */
     public synchronized String readString() {
-        return new String(readByteArray());
+        byte[] temp = readByteArray();
+        return temp == null ? null : new String(temp);
     }
 
 
     /**
-     * @return next Object from buffer
      * @param convertor deserializer of possible object  , can also throw RuntimeException if its malformed
+     * @return next Object from buffer
      * @throws RuntimeException if array is truncated and was not able to provide requested length or when its malformed
      */
-    public synchronized <T> T readObject(Function<byte[],T> convertor){
+    public synchronized <T> T readObject(Function<byte[], T> convertor) {
         return convertor.apply(readByteArray());
     }
 
     /**
      * repetitive overload of {@link Deserializer#readObject(Function)}
+     *
      * @param convertor deserializer of possible object  , can also throw RuntimeException if its malformed
      * @return next array of T
      * @throws RuntimeException if array is truncated and was not able to provide requested length or when its malformed (if any in array)
      */
     @SuppressWarnings("unchecked")
-    public synchronized <T> T[] readObjectArray(Function<byte[],T> convertor){
+    public synchronized <T> T[] readObjectArray(Function<byte[], T> convertor, Class<T> clazz) {
         int i = readInt32();
-        T[] objects = (T[]) new Object[i];
+        if(i==0)
+            return null;
+
+        T[] objects = (T[]) Array.newInstance(clazz, i);
         for (int j = 0; j < i; j++) {
             objects[j] = readObject(convertor);
         }
-        return  objects;
+        return objects;
     }
 
 
@@ -109,8 +115,11 @@ final public class Deserializer {
      * @return next int32 (int) from buffer
      * @throws RuntimeException if array is truncated and was not able to provide requested length
      */
-    public synchronized int[] readInt32Array(){
+    public synchronized int[] readInt32Array() {
         int i = readInt32();
+        if(i==0)
+            return null;
+
         int[] objects = new int[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readInt32();
@@ -122,14 +131,15 @@ final public class Deserializer {
      * @return next string array from buffer
      * @throws RuntimeException if array is truncated and was not able to provide requested length
      */
-    public synchronized String[] readStringArray(){
-        Object[] o = readObjectArray(String::new);
-        return (String[])o;
+    public synchronized String[] readStringArray() {
+        return readObjectArray(String::new, String.class);
     }
 
 
-    public synchronized long[] readInt64Array(){
+    public synchronized long[] readInt64Array() {
         int i = readInt32();
+        if(i==0)
+            return null;
         long[] objects = new long[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readInt64();
@@ -137,8 +147,10 @@ final public class Deserializer {
         return objects;
     }
 
-    public synchronized boolean[] readBoolArray(){
+    public synchronized boolean[] readBoolArray() {
         int i = readInt32();
+        if(i==0)
+            return null;
         boolean[] objects = new boolean[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readBool();
@@ -146,8 +158,10 @@ final public class Deserializer {
         return objects;
     }
 
-    public synchronized float[] readFloat32Array(){
+    public synchronized float[] readFloat32Array() {
         int i = readInt32();
+        if(i==0)
+            return null;
         float[] objects = new float[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readFloat32();
@@ -155,8 +169,10 @@ final public class Deserializer {
         return objects;
     }
 
-    public synchronized double[] readFloat64Array(){
+    public synchronized double[] readFloat64Array() {
         int i = readInt32();
+        if(i==0)
+            return null;
         double[] objects = new double[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readFloat64();
@@ -164,8 +180,10 @@ final public class Deserializer {
         return objects;
     }
 
-    public synchronized byte[][] readByteArrayArray(){
+    public synchronized byte[][] readByteArrayArray() {
         int i = readInt32();
+        if(i==0)
+            return null;
         byte[][] objects = new byte[i][];
         for (int j = 0; j < i; j++) {
             objects[j] = readByteArray();
@@ -178,9 +196,9 @@ final public class Deserializer {
      * @return byte array containing exactly number of bytes requested
      * @throws RuntimeException if array is truncated and was not able to provide requested length
      */
-    byte[] readNBytes(int n){
+    byte[] readNBytes(int n) {
         byte[] arr = new byte[n];
-        if(bis.read(arr,0,n)!=n)
+        if (bis.read(arr, 0, n) != n)
             throw new RuntimeException("buffer is truncated respecting to what is expected");
         return arr;
     }

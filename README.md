@@ -23,6 +23,16 @@ its also mentionable that Quanta is a standalone library, which makes it pretty 
 
 ![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")
 
+## features
++ supports all primitives and their object wrappers automatically
++ supports all primitive arrays and their wrappers automatically
++ supports multidimensional arrays of anytype of any dimension
++ supports java collection framework (ArrayList,List,LinkedList,Queue,...)
++ branchless structure and smooth jit optimization
++ lower overhead compared to other serializers for mapping structure
++ caching schemas for faster further mappings (cleanable)
++ threadsafe 
+
 ## Integrate
 
 
@@ -73,7 +83,7 @@ dependencies {
 // Auto Object Map:
 
 //initializer is a reflective ObjectGraph so its costy but the result is threadsafe and fast
-BasicSerializer<TestOBJ> serializer = new BasicSerializer<>(TestOBJ.class); // initialize it 
+NestedConverter<TestOBJ> serializer = new NestedConverter<>(TestOBJ.class); // initialize it 
 
 //use it
 byte[] arr = serializer.serialize(f); 

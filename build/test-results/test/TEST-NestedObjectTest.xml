@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="NestedObjectTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-24T00:55:33" hostname="bellacia" time="0.009">
+  <properties/>
+  <testcase name="shouldSerializeAndDeserializeNestedObjects()" classname="NestedObjectTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

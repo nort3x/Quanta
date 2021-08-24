@@ -52,7 +52,7 @@ Step 2. Add the dependency
 <dependency>
     <groupId>com.github.nort3x</groupId>
     <artifactId>Quanta</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -74,7 +74,7 @@ allprojects {
 Step 2. Add the dependency
 ```gradle
 dependencies {
-        implementation 'com.github.nort3x:Quanta:1.0.0'
+        implementation 'com.github.nort3x:Quanta:1.0.2'
 }
 ```
 
@@ -124,7 +124,7 @@ double aDouble = d.readFloat64();
 + adding cross language support
 
 ## Donation
-if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you dont smoke yourself i dont expect anything
+if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you don't smoke yourself i don't expect anything
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

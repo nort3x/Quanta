@@ -77,4 +77,15 @@ public class AllConversionTest {
         Assertions.assertEquals(re_obj,obj);
     }
 
+    @Test
+    void shouldConvertTypesWithCollections(){
+        NestedConvertor<ObjectWithCollection> convertor = new NestedConvertor<>(ObjectWithCollection.class);
+        ObjectWithCollection obj = new ObjectWithCollection();
+        byte[] ser = convertor.serialize(obj);
+        System.out.println("Binary: "+new String(ser));
+        System.out.println("Hex: "+ TestUtils.bytesToHex(ser));
+        ObjectWithCollection re_obj = convertor.deserialize(ser);
+        Assertions.assertEquals(re_obj,obj);
+    }
+
 }

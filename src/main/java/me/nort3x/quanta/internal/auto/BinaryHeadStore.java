@@ -7,8 +7,7 @@ import me.nort3x.quanta.internal.basics.arrays.primitives.*;
 import me.nort3x.quanta.internal.basics.primitives.*;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BinaryHeadStore {
@@ -59,6 +58,15 @@ public class BinaryHeadStore {
 
         put(long[].class, new Int64ArrayBinaryHead());
         put(Long[].class, new Int64ArrayBinaryHeadDual());
+
+        //special types
+        CollectionBinaryHead ch = new CollectionBinaryHead();
+        put(Collection.class,ch);put(Set.class,ch);put(List.class,ch);
+        put(PriorityQueue.class,ch);put(HashSet.class,ch);
+        put(LinkedHashSet.class,ch);put(SortedSet.class,ch);
+        put(TreeSet.class,ch);put(Deque.class,ch);put(ArrayDeque.class,ch);
+        put(ArrayList.class,ch);put(LinkedList.class,ch);
+        put(Vector.class,ch);put(Stack.class,ch);
 
     }};
 

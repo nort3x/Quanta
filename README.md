@@ -23,6 +23,16 @@ its also mentionable that Quanta is a standalone library, which makes it pretty 
 
 ![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")
 
+## features
++ supports all primitives and their object wrappers automatically
++ supports all primitive arrays and their wrappers automatically
++ supports multidimensional arrays of anytype of any dimension
++ supports java collection framework (ArrayList,List,LinkedList,Queue,...)
++ branchless structure and smooth jit optimization
++ lower overhead compared to other serializers for mapping structure
++ caching schemas for faster further mappings (cleanable)
++ threadsafe 
+
 ## Integrate
 
 
@@ -42,7 +52,7 @@ Step 2. Add the dependency
 <dependency>
     <groupId>com.github.nort3x</groupId>
     <artifactId>Quanta</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -64,7 +74,7 @@ allprojects {
 Step 2. Add the dependency
 ```gradle
 dependencies {
-        implementation 'com.github.nort3x:Quanta:1.0.0'
+        implementation 'com.github.nort3x:Quanta:1.0.2'
 }
 ```
 
@@ -73,7 +83,7 @@ dependencies {
 // Auto Object Map:
 
 //initializer is a reflective ObjectGraph so its costy but the result is threadsafe and fast
-BasicSerializer<TestOBJ> serializer = new BasicSerializer<>(TestOBJ.class); // initialize it 
+NestedConverter<TestOBJ> serializer = new NestedConverter<>(TestOBJ.class); // initialize it 
 
 //use it
 byte[] arr = serializer.serialize(f); 
@@ -113,7 +123,8 @@ double aDouble = d.readFloat64();
 + giving it structure
 + adding cross language support
 
-
+## Donation
+if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you don't smoke yourself i don't expect anything
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -9,8 +9,8 @@ allprojects {
 }
 apply plugin: 'maven'
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_9
+targetCompatibility = JavaVersion.VERSION_9
 
 group 'me.nort3x'
 version '1.0.0'

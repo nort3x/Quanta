@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ManualSerialization" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-24T00:55:33" hostname="bellacia" time="0.01">
-  <properties/>
-  <testcase name="shouldBeAbleToMakeAQuanta()" classname="ManualSerialization" time="0.01"/>
-  <system-out><![CDATA[Serialized Message as String : ??????Quanta?�333333?���?????????????�????????1????2????3????4????????????????????
-Serialized Message as Hex : 01 02 00 00 00 06 51 75 61 6E 74 61 3F F3 33 33 33 33 33 33 3F 99 99 9A 01 00 00 00 00 14 00 00 00 00 00 00 00 C8 00 00 00 04 00 00 00 01 31 00 00 00 01 32 00 00 00 01 33 00 00 00 01 34 00 00 00 04 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 04 
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

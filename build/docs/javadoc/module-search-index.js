@@ -1,1 +1,0 @@
-moduleSearchIndex = [{"l":"me.nort3x.quanta"}]

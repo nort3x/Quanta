@@ -1,11 +1,9 @@
-import nortex.quanta.serialize.basic.Deserializer;
-import nortex.quanta.serialize.basic.Serializer;
-import nortex.quanta.utils.TestUtils;
+import me.nort3x.quanta.pub.basic.Deserializer;
+import me.nort3x.quanta.pub.basic.Serializer;
+import me.nort3x.quanta.internal.utils.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 public class ManualSerialization {
 
@@ -24,7 +22,7 @@ public class ManualSerialization {
         s.writeInt32(20);
         s.writeInt64(200);
         s.writeStringArray("1,2,3,4".split(","));
-        s.writeIntArray(new int[]{1, 2, 3, 4});
+        s.writeInt32Array(new int[]{1, 2, 3, 4});
 
         // s.writeObject(YourObject,YourConverter);  // just to introduce API
         // s.writeObjectArray(YourObject,YourConverter);

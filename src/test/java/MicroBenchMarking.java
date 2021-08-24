@@ -1,3 +1,4 @@
+import TestObjects.TestObjectOfPrimitives;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,31 +8,33 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.runner.CaliperMain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import nortex.quanta.serialize.auto.BasicSerializer;
+import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
+import me.nort3x.quanta.pub.auto.NestedConvertor;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import java.io.IOException;
-import java.io.PrintStream;
 
 public class MicroBenchMarking {
     public static class BenchMarkTime {
 
-        BasicSerializer<TestObject> quanta;
-        TestObject randomObject;
+        PrimitiveConvertor<TestObjectOfPrimitives> quanta;
+        NestedConvertor<TestObjectOfPrimitives> quanta2;
+
+        TestObjectOfPrimitives randomObject;
         Gson gson;
         ObjectMapper messagepk;
 
-        byte[] quantaSerialized, msgpkSerialized;
+        byte[] quantaSerialized, msgpkSerialized,quantaSerialized2;
         String gsonSerialized;
 
 
         @BeforeExperiment
         protected void setUp() throws JsonProcessingException {
-            randomObject = TestObject.randomTestObject();
+            randomObject = TestObjectOfPrimitives.randomTestObject();
 
 
-
-            quanta = new BasicSerializer<>(TestObject.class);
+            quanta = new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
+            quanta2 = new NestedConvertor<>(TestObjectOfPrimitives.class);
 
             gson = new GsonBuilder().create();
 
@@ -41,9 +44,16 @@ public class MicroBenchMarking {
             gsonSerialized = gson.toJson(randomObject);
             msgpkSerialized = messagepk.writeValueAsBytes(randomObject);
             quantaSerialized = quanta.serialize(randomObject);
-
+            quantaSerialized2 = quanta2.serialize(randomObject);
 
         }
+
+        @Benchmark
+        public void quanta2Serialize(int reps) {
+            for (int i = 0; i < reps; i++)
+                quantaSerialized = quanta2.serialize(randomObject);
+        }
+
 
         @Benchmark
         public void quantaSerialize(int reps) {
@@ -63,7 +73,13 @@ public class MicroBenchMarking {
         @Benchmark
         public void gsonDeserialize(int reps) {
             for (int i = 0; i < reps; i++)
-                gson.fromJson(gsonSerialized,TestObject.class);
+                gson.fromJson(gsonSerialized, TestObjectOfPrimitives.class);
+        }
+
+        @Benchmark
+        public void quanta2Deserialize(int reps) {
+            for (int i = 0; i < reps; i++)
+                quanta2.deserialize(quantaSerialized2);
         }
 
         @Benchmark
@@ -76,7 +92,7 @@ public class MicroBenchMarking {
         public void messagePackDeserialize(int reps) throws IOException {
 
             for (int i = 0; i < reps; i++)
-                messagepk.readValue(msgpkSerialized,TestObject.class);
+                messagepk.readValue(msgpkSerialized, TestObjectOfPrimitives.class);
 
         }
 

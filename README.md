@@ -19,19 +19,19 @@ main purpose of Quanta is being the head first solution for efficiency in practi
 
 its also mentionable that Quanta is a standalone library, which makes it pretty small compared to other libraries
 
-[comparison benchmark](https://github.com/nort3x/Quanta/blob/main/Benchmark.txt)
+[comparison benchmark](https://github.com/nort3x/Quanta/blob/java9/Benchmark.txt)
 
-![comparison-chart](https://github.com/nort3x/Quanta/blob/main/chart.png "comparison chart")
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/chart.png "comparison chart")
 
 ## features
 + supports all primitives and their object wrappers automatically
 + supports all primitive arrays and their wrappers automatically
 + supports multidimensional arrays of anytype of any dimension
-+ supports java collection framework (ArrayList,List,LinkedList,Queue,...)
++ supports java collection framework (Maps and Collections)
 + branchless structure and smooth jit optimization
 + lower overhead compared to other serializers for mapping structure
 + caching schemas for faster further mappings (cleanable)
-+ threadsafe 
++ threadsafe
 
 ## Integrate
 

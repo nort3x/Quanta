@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import me.nort3x.quanta.internal.utils.TestUtils;
 import me.nort3x.quanta.pub.auto.NestedConvertor;
 import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
 import me.nort3x.quanta.internal.utils.SexyTimer;
@@ -30,10 +31,10 @@ public class SpeedTest {
         List<Long> q2_res = quanta2TestResult(t,200);
 
 
-        System.out.println("Gson average: " + g_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("Quanta2 average: " + q2_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("Quanta average: " + q_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("MessagePack average: " + m_res.stream().mapToInt(Long::intValue).average().getAsDouble());
+        System.out.println("Gson average: " + TestUtils.average(g_res));
+        System.out.println("MessagePack average: " + TestUtils.average(m_res));
+        System.out.println("Quanta average: " + TestUtils.average(q_res));
+        System.out.println("Quanta2 average: " + TestUtils.average(q2_res));
 
         FileOutputStream fos = new FileOutputStream("gson_mpack_q1_q2_speed.dat");
         for (int i = 0; i < 200; i++) {
@@ -43,49 +44,38 @@ public class SpeedTest {
     }
 
 
-    List<Long> quantaTestResult(TestObjectOfPrimitives data, int tries) {
-        PrimitiveConvertor<TestObjectOfPrimitives> mapper =  new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
+    List<Long> quantaTestResult(final TestObjectOfPrimitives data, int tries) {
+        final PrimitiveConvertor<TestObjectOfPrimitives> mapper =  new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(
-                    SexyTimer.getMean(() -> {
+                    SexyTimer.getMean(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        byte[] bin = mapper.serialize(data);
-                        TestObjectOfPrimitives t = mapper.deserialize(bin);
+                            byte[] bin = mapper.serialize(data);
+                            TestObjectOfPrimitives t = mapper.deserialize(bin);
 
+                        }
                     }, 1000).getDuration()
             );
         }
         return arr;
     }
 
-    List<Long> quanta2TestResult(TestObjectOfPrimitives data, int tries) {
-        NestedConvertor<TestObjectOfPrimitives> mapper =  new NestedConvertor<>(TestObjectOfPrimitives.class);
+    List<Long> quanta2TestResult(final TestObjectOfPrimitives data, int tries) {
+        final NestedConvertor<TestObjectOfPrimitives> mapper =  new NestedConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(
-                    SexyTimer.getMean(() -> {
+                    SexyTimer.getMean(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        byte[] bin = mapper.serialize(data);
-                        TestObjectOfPrimitives t = mapper.deserialize(bin);
+                            byte[] bin = mapper.serialize(data);
+                            TestObjectOfPrimitives t = mapper.deserialize(bin);
 
-                    }, 1000).getDuration()
-            );
-        }
-        return arr;
-    }
-
-
-    List<Long> gsonTestResult(TestObjectOfPrimitives data, int tries) {
-        Gson g = new Gson();
-        List<Long> arr = new ArrayList<>();
-        for (int i = 0; i < tries; i++) {
-            arr.add(
-                    SexyTimer.getMean(() -> {
-
-                        String s = g.toJson(data);
-                        TestObjectOfPrimitives t = g.fromJson(s, TestObjectOfPrimitives.class);
-
+                        }
                     }, 1000).getDuration()
             );
         }
@@ -93,21 +83,44 @@ public class SpeedTest {
     }
 
 
-    List<Long> messagePackTestResult(TestObjectOfPrimitives data, int tries) {
-        ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
+    List<Long> gsonTestResult(final TestObjectOfPrimitives data, int tries) {
+        final Gson g = new Gson();
+        List<Long> arr = new ArrayList<>();
+        for (int i = 0; i < tries; i++) {
+            arr.add(
+                    SexyTimer.getMean(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            String s = g.toJson(data);
+                            TestObjectOfPrimitives t = g.fromJson(s, TestObjectOfPrimitives.class);
+
+                        }
+                    }, 1000).getDuration()
+            );
+        }
+        return arr;
+    }
+
+
+    List<Long> messagePackTestResult(final TestObjectOfPrimitives data, int tries) {
+        final ObjectMapper objectMapper = new ObjectMapper(new MessagePackFactory());
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         List<Long> arr = new ArrayList<>();
         for (int i = 0; i < tries; i++) {
             arr.add(
-                    SexyTimer.getMean(() -> {
+                    SexyTimer.getMean(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        try {
-                            byte[] buff = objectMapper.writeValueAsBytes(data);
-                            TestObjectOfPrimitives t = objectMapper.readValue(buff, TestObjectOfPrimitives.class);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            try {
+                                byte[] buff = objectMapper.writeValueAsBytes(data);
+                                TestObjectOfPrimitives t = objectMapper.readValue(buff, TestObjectOfPrimitives.class);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-
                     }, 1000).getDuration()
             );
         }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import me.nort3x.quanta.internal.utils.TestUtils;
 import me.nort3x.quanta.pub.auto.NestedConvertor;
 import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SizeTest {
-
 
 
     // will generate a test result file which can describe over all comparison between serialization methods
@@ -33,21 +33,21 @@ public class SizeTest {
         List<Long> q2_res = quanta2TestResult(objects);
 
 
-        System.out.println("Gson average: " + g_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("MessagePack average: " + m_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("Quanta average: " + q_res.stream().mapToInt(Long::intValue).average().getAsDouble());
-        System.out.println("Quanta2 average: " + q2_res.stream().mapToInt(Long::intValue).average().getAsDouble());
+        System.out.println("Gson average: " + TestUtils.average(g_res));
+        System.out.println("MessagePack average: " + TestUtils.average(m_res));
+        System.out.println("Quanta average: " + TestUtils.average(q_res));
+        System.out.println("Quanta2 average: " + TestUtils.average(q2_res));
 
         FileOutputStream fos = new FileOutputStream("gson_mpack_q1_q2_size.dat");
         for (int i = 0; i < 200; i++) {
-            fos.write((g_res.get(i)+"\t"+m_res.get(i)+"\t"+q_res.get(i)+"\t"+q2_res.get(i)+"\n").getBytes());
+            fos.write((g_res.get(i) + "\t" + m_res.get(i) + "\t" + q_res.get(i) + "\t" + q2_res.get(i) + "\n").getBytes());
         }
         fos.close();
     }
 
 
     List<Long> quantaTestResult(List<TestObjectOfPrimitives> data) {
-        PrimitiveConvertor<TestObjectOfPrimitives> mapper =  new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
+        PrimitiveConvertor<TestObjectOfPrimitives> mapper = new PrimitiveConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
         for (TestObjectOfPrimitives datum : data) {
             arr.add((long) mapper.serialize(datum).length);
@@ -56,7 +56,7 @@ public class SizeTest {
     }
 
     List<Long> quanta2TestResult(List<TestObjectOfPrimitives> data) {
-        NestedConvertor<TestObjectOfPrimitives> mapper =  new NestedConvertor<>(TestObjectOfPrimitives.class);
+        NestedConvertor<TestObjectOfPrimitives> mapper = new NestedConvertor<>(TestObjectOfPrimitives.class);
         List<Long> arr = new ArrayList<>();
         for (TestObjectOfPrimitives datum : data) {
             arr.add((long) mapper.serialize(datum).length);

@@ -1,8 +1,7 @@
 package me.nort3x.quanta.internal.auto;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.reflect.Modifier.isStatic;
 import static java.lang.reflect.Modifier.isTransient;
@@ -18,7 +17,12 @@ public class Scanner {
             field.setAccessible(true);
             listOfFields.add(field);
         }
-        listOfFields.sort((o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName()));
+        Collections.sort(listOfFields, new Comparator<Field>() {
+            @Override
+            public int compare(Field o1, Field o2) {
+                return  String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
+            }
+        });
         return listOfFields;
     }
 }

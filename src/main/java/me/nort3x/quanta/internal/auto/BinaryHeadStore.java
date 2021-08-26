@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BinaryHeadStore {
-    static final private Map<Class<?>, BinaryHead> primitiveHeads = new HashMap<>() {{
+    static final private Map<Class<?>, BinaryHead> primitiveHeads = new HashMap<Class<?>, BinaryHead>() {{
 
         // primitives
         put(int.class, new Int32BinaryHead());

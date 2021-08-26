@@ -1,10 +1,9 @@
 package me.nort3x.quanta.pub.basic;
 
 import me.nort3x.quanta.internal.utils.Converters;
+import me.nort3x.quanta.legacy_support.Function;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Collection;
-import java.util.function.Function;
 
 /**
  * <h2>
@@ -153,7 +152,12 @@ final public class Serializer {
     }
 
     public synchronized void writeStringArray(String[] arr){
-        writeObjectArray(arr,String::getBytes);
+        writeObjectArray(arr, new Function<String, byte[]>() {
+            @Override
+            public byte[] apply(String s) {
+                return s.getBytes();
+            }
+        });
     }
 
     public synchronized byte[] toArray() {

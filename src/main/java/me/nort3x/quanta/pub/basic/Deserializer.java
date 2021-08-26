@@ -1,10 +1,10 @@
 package me.nort3x.quanta.pub.basic;
 
 import me.nort3x.quanta.internal.utils.Converters;
+import me.nort3x.quanta.legacy_support.Function;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Array;
-import java.util.function.Function;
 
 /**
  * <h2>
@@ -132,7 +132,12 @@ final public class Deserializer {
      * @throws RuntimeException if array is truncated and was not able to provide requested length
      */
     public synchronized String[] readStringArray() {
-        return readObjectArray(String::new, String.class);
+        return readObjectArray(new Function<byte[], String>() {
+            @Override
+            public String apply(byte[] bytes) {
+                return new String(bytes);
+            }
+        }, String.class);
     }
 
 

@@ -5,7 +5,9 @@ import me.nort3x.quanta.internal.basics.arrays.objects.StringArrayBinaryHead;
 import me.nort3x.quanta.internal.basics.arrays.objects.StringBinaryHead;
 import me.nort3x.quanta.internal.basics.arrays.primitives.*;
 import me.nort3x.quanta.internal.basics.primitives.*;
+import me.nort3x.quanta.internal.basics.primitives.objects.*;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
+import me.nort3x.quanta.internal.objects.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,30 +16,26 @@ public class BinaryHeadStore {
     static final private Map<Class<?>, BinaryHead> primitiveHeads = new HashMap<>() {{
 
         // primitives
-        Int32BinaryHead i32h = new Int32BinaryHead();
-        put(int.class, i32h);
-        put(Integer.class, i32h);
-        Int64BinaryHead i64h = new Int64BinaryHead();
-        put(long.class, i64h);
-        put(Long.class, i64h);
+        put(int.class, new Int32BinaryHead());
+        put(Integer.class, new Int32ObjectBinaryHead());
 
-        Float32BinaryHead f32h = new Float32BinaryHead();
-        put(float.class, f32h);
-        put(Float.class, f32h);
-        Float64BinaryHead f64h = new Float64BinaryHead();
-        put(double.class, f64h);
-        put(Double.class, f64h);
+        put(long.class, new Int64BinaryHead());
+        put(Long.class, new Int64ObjectBinaryHead());
 
-        BoolBinaryHead bh = new BoolBinaryHead();
-        put(boolean.class, bh);
-        put(Boolean.class, bh);
+        put(float.class, new Float32BinaryHead());
+        put(Float.class, new Float32ObjectBinaryHead());
 
-        ByteBinaryHead byh = new ByteBinaryHead();
-        put(byte.class, byh);
-        put(Byte.class, byh);
+        put(double.class, new Float64BinaryHead());
+        put(Double.class, new Float64ObjectBinaryHead());
+
+        put(boolean.class, new BoolBinaryHead());
+        put(Boolean.class, new BooleanObjectBinaryHead());
+
+        put(byte.class, new ByteBinaryHead());
+        put(Byte.class, new ByteObjectBinaryHead());
 
 
-        // array heads
+        // arrays
         put(String.class, new StringBinaryHead());
         put(String[].class, new StringArrayBinaryHead());
 
@@ -59,7 +57,12 @@ public class BinaryHeadStore {
         put(long[].class, new Int64ArrayBinaryHead());
         put(Long[].class, new Int64ArrayBinaryHeadDual());
 
+
+
         //special types
+        put(Object.class,new IdentityBinaryHead());
+
+        // collections
         CollectionBinaryHead ch = new CollectionBinaryHead();
         put(Collection.class,ch);put(Set.class,ch);put(List.class,ch);
         put(PriorityQueue.class,ch);put(HashSet.class,ch);
@@ -68,6 +71,17 @@ public class BinaryHeadStore {
         put(ArrayList.class,ch);put(LinkedList.class,ch);
         put(Vector.class,ch);put(Stack.class,ch);
 
+        // maps
+        MapBinaryHead mb = new MapBinaryHead();
+        put(Map.class,mb);
+        put(AbstractMap.class,mb);
+        put(WeakHashMap.class,mb);
+        put(HashMap.class,mb);
+        put(Hashtable.class,mb);
+        put(LinkedHashMap.class,mb);
+        put(TreeMap.class,mb);
+        put(SortedMap.class,mb);
+        put(NavigableMap.class,mb);
     }};
 
 

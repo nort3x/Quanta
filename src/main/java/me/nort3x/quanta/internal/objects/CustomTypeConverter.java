@@ -1,5 +1,7 @@
-package me.nort3x.quanta.internal.auto;
+package me.nort3x.quanta.internal.objects;
 
+import me.nort3x.quanta.internal.auto.BinaryHeadStore;
+import me.nort3x.quanta.internal.auto.Scanner;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
@@ -17,7 +19,7 @@ public class CustomTypeConverter implements BinaryHead {
 
     private final Map<Field, BinaryHead> heads;
 
-    protected CustomTypeConverter(Class<?> type) {
+    public CustomTypeConverter(Class<?> type) {
         this.type = type;
         heads = new HashMap<>();
         fieldList = Scanner.getFields(type);

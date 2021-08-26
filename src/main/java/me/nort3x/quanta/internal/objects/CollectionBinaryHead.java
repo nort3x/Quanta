@@ -1,5 +1,7 @@
-package me.nort3x.quanta.internal.auto;
+package me.nort3x.quanta.internal.objects;
 
+import me.nort3x.quanta.internal.auto.BinaryHeadStore;
+import me.nort3x.quanta.internal.auto.DummyClass;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
@@ -18,9 +20,8 @@ public class CollectionBinaryHead implements BinaryHead {
         int size = ds.readInt32();
         if (size == 0)
             return;
-        CollectionID collectionID = CollectionID.byteID(ds.readInt32());
         try {
-            Collection collection = collectionID.type == Collection.class ? new ArrayList() : (Collection) collectionID.type.newInstance();
+            Collection collection = (Collection) f.getType().newInstance();
 
             Class<?> type = (Class<?>) ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0];
             BinaryHead bh = BinaryHeadStore.getBinaryHeadOf(type);
@@ -47,10 +48,8 @@ public class CollectionBinaryHead implements BinaryHead {
             return;
         }
 
-        CollectionID collectionID = CollectionID.byType(c.getClass());
 
         sr.writeInt32(c.size());
-        sr.writeInt32(collectionID.id);
 
         Class<?> type = (Class<?>) ((ParameterizedType) f.getGenericType()).getActualTypeArguments()[0];
         BinaryHead bh = BinaryHeadStore.getBinaryHeadOf(type);
@@ -59,35 +58,6 @@ public class CollectionBinaryHead implements BinaryHead {
         for (Object o1 : c) {
             dm.t = o1;
             bh.getAndWrite(sr, dummyField, dm);
-        }
-    }
-
-
-    private enum CollectionID {
-        ARRAYLIST(1, ArrayList.class),
-        LINKED_LIST(2, LinkedList.class),
-        VECTOR(3, Vector.class),
-        STACK(4, Stack.class),
-        PRIORITY_QUEUE(5, PriorityQueue.class),
-        ARRAY_DEQUEUE(6, ArrayDeque.class),
-        HASHSET(7, HashSet.class),
-        LINKED_HASHSET(8, LinkedHashSet.class),
-        TREESET(9, TreeSet.class),
-        GENERICCOLLECTION(10, null);
-        int id;
-        Class<?> type;
-
-        CollectionID(int id, Class<?> type) {
-            this.id = id;
-            this.type = type;
-        }
-
-        static CollectionID byType(Class<?> type) {
-            return Arrays.stream(values()).sequential().filter(x -> x.type.equals(type)).findFirst().orElse(GENERICCOLLECTION);
-        }
-
-        static CollectionID byteID(int i) {
-            return Arrays.stream(values()).sequential().filter(x -> x.id == i).findFirst().orElse(GENERICCOLLECTION);
         }
     }
 

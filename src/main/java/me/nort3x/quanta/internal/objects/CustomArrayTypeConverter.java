@@ -1,5 +1,6 @@
-package me.nort3x.quanta.internal.auto;
+package me.nort3x.quanta.internal.objects;
 
+import me.nort3x.quanta.internal.auto.DummyClass;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;

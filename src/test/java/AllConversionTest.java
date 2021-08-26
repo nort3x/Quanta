@@ -5,6 +5,8 @@ import me.nort3x.quanta.pub.auto.PrimitiveConvertor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class AllConversionTest {
 
 
@@ -87,5 +89,27 @@ public class AllConversionTest {
         ObjectWithCollection re_obj = convertor.deserialize(ser);
         Assertions.assertEquals(re_obj,obj);
     }
+
+
+
+
+    @Test
+    void shouldSerializeSinaModel(){
+        NestedConvertor<SinaModelObject> smc = new NestedConvertor<>(SinaModelObject.class);
+
+        SinaModelObject sm = new SinaModelObject();
+        sm.points.add(new ModelPoint(1,2));
+        sm.points.add(new ModelPoint(2,2));
+        sm.map.put(1,new ModelPoint(1,1));
+
+        byte[] sered = smc.serialize(sm);
+        SinaModelObject reConstructed = smc.deserialize(sered);
+
+        System.out.println(TestUtils.bytesToHex(sered));
+
+        Assertions.assertEquals(reConstructed,sm);
+
+    }
+
 
 }

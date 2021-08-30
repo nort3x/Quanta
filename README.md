@@ -128,7 +128,7 @@ double aDouble = d.readFloat64();
 + adding cross language support
 
 ## Donation
-if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you don't smoke yourself i don't expect anything
+if you liked **Quanta** you can buy me a pack of ciggaretes [here](https://github.com/nort3x/nort3x/tree/main/donate) as a token of apperiation.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

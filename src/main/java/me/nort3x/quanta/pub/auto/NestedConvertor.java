@@ -3,6 +3,7 @@ package me.nort3x.quanta.pub.auto;
 import me.nort3x.quanta.internal.auto.BinaryHeadStore;
 import me.nort3x.quanta.internal.auto.DummyClass;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
+import me.nort3x.quanta.pub.basic.DeserializationConfig;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
 import me.nort3x.quanta.pub.interfaces.BinaryConverter;
@@ -21,16 +22,21 @@ public class NestedConvertor<T> implements BinaryConverter<T> {
         }
     }
 
-    public NestedConvertor(Class<?> type) {
+    private final DeserializationConfig config;
+    public NestedConvertor(Class<T> type, DeserializationConfig deserializationConfig) {
         typeBH = BinaryHeadStore.getBinaryHeadOf(type);
+        config = deserializationConfig;
     }
 
+    public NestedConvertor(Class<T> type) {
+        this(type,DeserializationConfig.getDefault());
+    }
 
     @Override
     public T deserialize(byte[] arr) {
         DummyClass<T> instance = new DummyClass<>();
         try {
-            typeBH.readAndSet(new Deserializer(arr),dummyClassField,instance);
+            typeBH.readAndSet(new Deserializer(arr,config),dummyClassField,instance);
             return instance.t;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);

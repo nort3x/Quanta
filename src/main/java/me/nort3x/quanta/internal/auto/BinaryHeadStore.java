@@ -84,11 +84,16 @@ public class BinaryHeadStore {
         put(NavigableMap.class,mb);
     }};
 
-
+    static final EnumBinaryHead enumBinaryHead = new EnumBinaryHead();
     static final Map<Class<?>, BinaryHead> customTypesBinaryHeads = new ConcurrentHashMap<>();
     static final Map<Class<?>, BinaryHead> customArrayTypesBinaryHeads = new ConcurrentHashMap<>();
 
     public static BinaryHead getBinaryHeadOf(Class<?> type) {
+
+        if(type.isEnum())
+            return enumBinaryHead;
+
+
         if (primitiveHeads.containsKey(type))
             return primitiveHeads.get(type);
         else if (type.isArray()) {

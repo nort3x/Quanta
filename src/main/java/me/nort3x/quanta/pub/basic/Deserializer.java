@@ -19,12 +19,19 @@ import java.lang.reflect.Array;
  */
 final public class Deserializer {
 
+    final DeserializationConfig deserializationConfig;
     ByteArrayInputStream bis;
 
     /**
      * @param arr array containing sequential serialized data
      */
     public Deserializer(byte[] arr) {
+        this(arr, DeserializationConfig.getDefault());
+    }
+
+
+    public Deserializer(byte[] arr, DeserializationConfig deserializationConfig) {
+        this.deserializationConfig = deserializationConfig;
         if (arr == null)
             throw new NullPointerException();
         bis = new ByteArrayInputStream(arr);
@@ -61,12 +68,13 @@ final public class Deserializer {
 
     /**
      * @return next byte array from buffer
-     * @throws RuntimeException if String is truncated and was not able to provide requested length
+     * @throws RuntimeException      if array is truncated and was not able to provide requested length
+     * @throws IllegalStateException if requested buffersize is bigger than remaining bytes
      */
     public synchronized byte[] readByteArray() {
         int i = readInt32();
         if (i == 0)
-            return null;
+            return deserializationConfig.isReplaceNullWithEmpty() ? new byte[0] : null;
         return readNBytes(i);
     }
 
@@ -100,8 +108,8 @@ final public class Deserializer {
     @SuppressWarnings("unchecked")
     public synchronized <T> T[] readObjectArray(Function<byte[], T> convertor, Class<T> clazz) {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? (T[]) Array.newInstance(clazz, 0) : null;
 
         T[] objects = (T[]) Array.newInstance(clazz, i);
         for (int j = 0; j < i; j++) {
@@ -117,8 +125,9 @@ final public class Deserializer {
      */
     public synchronized int[] readInt32Array() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new int[0] : null;
+
 
         int[] objects = new int[i];
         for (int j = 0; j < i; j++) {
@@ -143,8 +152,9 @@ final public class Deserializer {
 
     public synchronized long[] readInt64Array() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new long[0] : null;
+
         long[] objects = new long[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readInt64();
@@ -154,8 +164,9 @@ final public class Deserializer {
 
     public synchronized boolean[] readBoolArray() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new boolean[0] : null;
+
         boolean[] objects = new boolean[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readBool();
@@ -165,8 +176,8 @@ final public class Deserializer {
 
     public synchronized float[] readFloat32Array() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new float[0] : null;
         float[] objects = new float[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readFloat32();
@@ -176,8 +187,9 @@ final public class Deserializer {
 
     public synchronized double[] readFloat64Array() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new double[0] : null;
+
         double[] objects = new double[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readFloat64();
@@ -187,8 +199,9 @@ final public class Deserializer {
 
     public synchronized byte[][] readByteArrayArray() {
         int i = readInt32();
-        if(i==0)
-            return null;
+        if (i == 0)
+            return deserializationConfig.isReplaceNullWithEmpty() ? new byte[0][0] : null;
+
         byte[][] objects = new byte[i][];
         for (int j = 0; j < i; j++) {
             objects[j] = readByteArray();
@@ -199,9 +212,12 @@ final public class Deserializer {
     /**
      * @param n number of bytes requested
      * @return byte array containing exactly number of bytes requested
-     * @throws RuntimeException if array is truncated and was not able to provide requested length
+     * @throws RuntimeException      if array is truncated and was not able to provide requested length
+     * @throws IllegalStateException if requested buffersize is bigger than remaining bytes
      */
     byte[] readNBytes(int n) {
+        if (bis.available() < n)
+            throw new RuntimeException("buffer size flag is bigger than available bytes");
         byte[] arr = new byte[n];
         if (bis.read(arr, 0, n) != n)
             throw new RuntimeException("buffer is truncated respecting to what is expected");

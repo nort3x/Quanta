@@ -111,5 +111,14 @@ public class AllConversionTest {
 
     }
 
+    @Test
+    void shouldSerializeEnumTypes(){
+        EnumedType et = new EnumedType(EnumedType.ItsAnEnum.enum3);
+        NestedConvertor<EnumedType> convertor = new NestedConvertor<>(EnumedType.class);
+        byte[] h = convertor.serialize(et);
+        System.out.println(TestUtils.bytesToHex(h));
+        Assertions.assertEquals(convertor.deserialize(h).getAnEnum(), EnumedType.ItsAnEnum.enum3);
+    }
+
 
 }

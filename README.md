@@ -21,8 +21,12 @@ its also mentionable that Quanta is a standalone library, which makes it pretty 
 
 [comparison benchmark](https://github.com/nort3x/Quanta/blob/java9/Benchmark.txt)
 
+general comparison with `Gson` and `MessagePack` in terms of allocation and runtime
 ![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/chart.png "comparison chart")
 
+speed compared to `ProtocolBuffer` and `MessagePack`  (ns/op)
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/comp2.png "comparison chart")
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/comp3.png "comparison chart")
 ## features
 + supports all primitives and their object wrappers automatically
 + supports all primitive arrays and their wrappers automatically
@@ -124,7 +128,7 @@ double aDouble = d.readFloat64();
 + adding cross language support
 
 ## Donation
-if you liked **Quanta** buy me a pack of ciggaretes [here](http://google.com), if you don't smoke yourself i don't expect anything
+if you liked **Quanta** you can buy me a pack of ciggaretes [here](https://github.com/nort3x/nort3x/tree/main/donate) as a token of apperiation.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

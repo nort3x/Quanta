@@ -1,91 +1,258 @@
-Trial Report (1 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=gsonDeserialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=3456.00, 1st qu.=3456.00, median=3456.00, mean=3456.00, 3rd qu.=3456.00, max=3456.00
-    objects: min=17.00, 1st qu.=17.00, median=17.00, mean=17.00, 3rd qu.=17.00, max=17.00
-Trial Report (2 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=gsonSerialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=12456.00, 1st qu.=12456.00, median=12456.00, mean=12456.00, 3rd qu.=12456.00, max=12456.00
-    objects: min=514.00, 1st qu.=514.00, median=514.00, mean=514.00, 3rd qu.=514.00, max=514.00
-Trial Report (3 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=messagePackDeserialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=928.00, 1st qu.=928.00, median=928.00, mean=928.00, 3rd qu.=928.00, max=928.00
-    objects: min=17.00, 1st qu.=17.00, median=17.00, mean=17.00, 3rd qu.=17.00, max=17.00
-Trial Report (4 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=messagePackSerialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=848.00, 1st qu.=848.00, median=848.00, mean=848.00, 3rd qu.=848.00, max=848.00
-    objects: min=9.00, 1st qu.=9.00, median=9.00, mean=9.00, 3rd qu.=9.00, max=9.00
-Trial Report (5 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=quanta2Deserialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=1360.00, 1st qu.=1360.00, median=1360.00, mean=1360.00, 3rd qu.=1360.00, max=1360.00
-    objects: min=15.00, 1st qu.=15.00, median=15.00, mean=15.00, 3rd qu.=15.00, max=15.00
-Trial Report (6 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=quanta2Serialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=176.00, 1st qu.=176.00, median=176.00, mean=176.00, 3rd qu.=176.00, max=176.00
-    objects: min=8.00, 1st qu.=8.00, median=8.00, mean=8.00, 3rd qu.=8.00, max=8.00
-Trial Report (7 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=quantaDeserialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=856.00, 1st qu.=856.00, median=856.00, mean=856.00, 3rd qu.=856.00, max=856.00
-    objects: min=12.00, 1st qu.=12.00, median=12.00, mean=12.00, 3rd qu.=12.00, max=12.00
-Trial Report (8 of 16):
-  Experiment {instrument=allocation, benchmarkMethod=quantaSerialize, target=default@local, parameters={}}
-  Results:
-    bytes(B): min=160.00, 1st qu.=160.00, median=160.00, mean=160.00, 3rd qu.=160.00, max=160.00
-    objects: min=7.00, 1st qu.=7.00, median=7.00, mean=7.00, 3rd qu.=7.00, max=7.00
-Trial Report (9 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=gsonDeserialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=62640.70, 1st qu.=62680.80, median=62725.44, mean=63139.18, 3rd qu.=63200.76, max=65217.01
-Trial Report (10 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=gsonSerialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=142114.96, 1st qu.=142997.44, median=143109.90, mean=144547.25, 3rd qu.=143469.51, max=154856.81
-Trial Report (11 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=messagePackDeserialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=1153.65, 1st qu.=1155.49, median=1160.47, mean=1181.50, 3rd qu.=1183.19, max=1273.34
-Trial Report (12 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=messagePackSerialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=2321.44, 1st qu.=2325.93, median=2341.32, mean=2348.17, 3rd qu.=2357.19, max=2412.12
-Trial Report (13 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=quanta2Deserialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=1373.14, 1st qu.=1391.61, median=1434.70, mean=1691.75, 3rd qu.=1770.28, max=2567.17
-Trial Report (14 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=quanta2Serialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=2193.99, 1st qu.=2206.17, median=2216.10, mean=2226.76, 3rd qu.=2237.33, max=2283.43
-Trial Report (15 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=quantaDeserialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=1525.17, 1st qu.=1527.61, median=1535.01, mean=1536.32, 3rd qu.=1537.72, max=1559.78
-Trial Report (16 of 16):
-  Experiment {instrument=runtime, benchmarkMethod=quantaSerialize, target=default@local, parameters={}}
-  Results:
-    runtime(ns): min=1267.40, 1st qu.=1272.13, median=1273.39, mean=1276.81, 3rd qu.=1279.52, max=1300.13
-For gsonDeserialize (runtime)
-  This benchmark does not require a microbenchmark. The granularity of the timer (54ns) is less than 0.1% of the fastest measured runtime across all experiments.
-For gsonSerialize (runtime)
-  This benchmark does not require a microbenchmark. The granularity of the timer (54ns) is less than 0.1% of the fastest measured runtime across all experiments.
-Collected 216 measurements from:
-  2 instrument(s)
-  2 virtual machine(s)
-  8 benchmark(s)
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.JavaSerializer.simpleObjectDeserialization
 
-Execution complete: 3.107 min.
-Some trials failed to upload. Consider uploading them manually.
+# Run progress: 0.00% complete, ETA 00:02:36
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: JavaSerializedSimpleObjectSize: 325
+JavaSerializedComplexObjectSize: 508
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+28758.272 ns/op
+# Warmup Iteration   2: 19783.999 ns/op
+Iteration   1: 19171.540 ns/op
+Iteration   2: 18962.081 ns/op
+Iteration   3: 18987.660 ns/op
+Iteration   4: 18991.632 ns/op
 
-Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
-Use '--warning-mode all' to show the individual deprecation warnings.
-See https://docs.gradle.org/6.5.1/userguide/command_line_interface.html#sec:command_line_warnings
 
-BUILD SUCCESSFUL in 3m 9s
-3 actionable tasks: 2 executed, 1 up-to-date
-5:05:55 AM: Task execution finished 'MicroBenchMarking.main()'.
+Result "benchmark.JavaSerializer.simpleObjectDeserialization":
+  19028.228 ±(99.9%) 623.159 ns/op [Average]
+  (min, avg, max) = (18962.081, 19028.228, 19171.540), stdev = 96.435
+  CI (99.9%): [18405.069, 19651.387] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.JavaSerializer.simpleObjectSerialization
+
+# Run progress: 16.67% complete, ETA 00:02:12
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: JavaSerializedSimpleObjectSize: 325
+JavaSerializedComplexObjectSize: 508
+5320.806 ns/op
+# Warmup Iteration   2: 5819.006 ns/op
+Iteration   1: 4563.551 ns/op
+Iteration   2: 4603.952 ns/op
+Iteration   3: 4598.300 ns/op
+Iteration   4: 4590.296 ns/op
+
+
+Result "benchmark.JavaSerializer.simpleObjectSerialization":
+  4589.025 ±(99.9%) 115.558 ns/op [Average]
+  (min, avg, max) = (4563.551, 4589.025, 4603.952), stdev = 17.883
+  CI (99.9%): [4473.466, 4704.583] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.ProtoBuf.protobufSimpleDeserialization
+
+# Run progress: 33.33% complete, ETA 00:01:46
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: 379.002 ns/op
+# Warmup Iteration   2: 364.028 ns/op
+Iteration   1: 356.628 ns/op
+Iteration   2: 354.969 ns/op
+Iteration   3: 356.416 ns/op
+Iteration   4: 355.893 ns/op
+
+
+Result "benchmark.ProtoBuf.protobufSimpleDeserialization":
+  355.976 ±(99.9%) 4.776 ns/op [Average]
+  (min, avg, max) = (354.969, 355.976, 356.628), stdev = 0.739
+  CI (99.9%): [351.201, 360.752] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.ProtoBuf.protobufSimpleObjectSerialization
+
+# Run progress: 50.00% complete, ETA 00:01:19
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: 1042.872 ns/op
+# Warmup Iteration   2: 894.315 ns/op
+Iteration   1: 879.601 ns/op
+Iteration   2: 879.863 ns/op
+Iteration   3: 876.438 ns/op
+Iteration   4: 880.670 ns/op
+
+
+Result "benchmark.ProtoBuf.protobufSimpleObjectSerialization":
+  879.143 ±(99.9%) 12.017 ns/op [Average]
+  (min, avg, max) = (876.438, 879.143, 880.670), stdev = 1.860
+  CI (99.9%): [867.126, 891.160] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.Quanta.simpleObjectDeserialization
+
+# Run progress: 66.67% complete, ETA 00:00:53
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: QuantaSerializedSimpleObjectSize: 82
+QuantaSerializedComplexObjectSize: 266
+612.254 ns/op
+# Warmup Iteration   2: 525.948 ns/op
+Iteration   1: 520.347 ns/op
+Iteration   2: 519.710 ns/op
+Iteration   3: 520.379 ns/op
+Iteration   4: 519.452 ns/op
+
+
+Result "benchmark.Quanta.simpleObjectDeserialization":
+  519.972 ±(99.9%) 2.998 ns/op [Average]
+  (min, avg, max) = (519.452, 519.972, 520.379), stdev = 0.464
+  CI (99.9%): [516.974, 522.970] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.Quanta.simpleObjectSerialization
+
+# Run progress: 83.33% complete, ETA 00:00:26
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: QuantaSerializedSimpleObjectSize: 82
+QuantaSerializedComplexObjectSize: 266
+862.414 ns/op
+# Warmup Iteration   2: 720.802 ns/op
+Iteration   1: 721.947 ns/op
+Iteration   2: 721.986 ns/op
+Iteration   3: 720.166 ns/op
+Iteration   4: 723.108 ns/op
+
+
+Result "benchmark.Quanta.simpleObjectSerialization":
+  721.802 ±(99.9%) 7.858 ns/op [Average]
+  (min, avg, max) = (720.166, 721.802, 723.108), stdev = 1.216
+  CI (99.9%): [713.944, 729.660] (assumes normal distribution)
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.MessagePack.messagePackDeserialization
+
+# Run progress: 0.00% complete, ETA 00:01:44
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+1817.502 ns/op
+# Warmup Iteration   2: 1546.107 ns/op
+Iteration   1: 1554.409 ns/op
+Iteration   2: 1557.193 ns/op
+Iteration   3: 1550.131 ns/op
+Iteration   4: 1582.202 ns/op
+
+
+Result "benchmark.MessagePack.messagePackDeserialization":
+  1560.984 ±(99.9%) 93.314 ns/op [Average]
+  (min, avg, max) = (1550.131, 1560.984, 1582.202), stdev = 14.440
+  CI (99.9%): [1467.670, 1654.298] (assumes normal distribution)
+
+
+# JMH version: 1.28
+# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-post-Debian-1
+# VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+# VM options: -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Blackhole mode: full + dont-inline hint
+# Warmup: 2 iterations, 3 s each
+# Measurement: 4 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: benchmark.MessagePack.messagePackSerialization
+
+# Run progress: 25.00% complete, ETA 00:01:20
+# Fork: 1 of 1
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+# Warmup Iteration   1: 1887.809 ns/op
+# Warmup Iteration   2: 1388.383 ns/op
+Iteration   1: 1383.630 ns/op
+Iteration   2: 1416.927 ns/op
+Iteration   3: 1522.778 ns/op
+Iteration   4: 1447.127 ns/op
+
+
+Result "benchmark.MessagePack.messagePackSerialization":
+  1442.615 ±(99.9%) 383.850 ns/op [Average]
+  (min, avg, max) = (1383.630, 1442.615, 1522.778), stdev = 59.401
+  CI (99.9%): [1058.765, 1826.466] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:02:39
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                   Mode  Cnt      Score     Error  Units
+JavaSerializer.simpleObjectDeserialization  avgt    4  19028.228 ± 623.159  ns/op
+JavaSerializer.simpleObjectSerialization    avgt    4   4589.025 ± 115.558  ns/op
+MessagePack.messagePackDeserialization      avgt    4  1560.984 ±  93.314  ns/op
+MessagePack.messagePackSerialization        avgt    4  1442.615 ± 383.850  ns/op
+ProtoBuf.protobufSimpleDeserialization      avgt    4  339.191 ±  5.755  ns/op
+ProtoBuf.protobufSimpleObjectSerialization  avgt    4  885.939 ± 15.484  ns/op
+Quanta.simpleObjectDeserialization          avgt    4  485.450 ±  7.972  ns/op
+Quanta.simpleObjectSerialization            avgt    4  734.367 ±  7.255  ns/op

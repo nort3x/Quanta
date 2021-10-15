@@ -19,14 +19,14 @@ main purpose of Quanta is being the head first solution for efficiency in practi
 
 its also mentionable that Quanta is a standalone library, which makes it pretty small compared to other libraries
 
-[comparison benchmark](https://github.com/nort3x/Quanta/blob/java9/Benchmark.txt)
+[comparison benchmark](https://github.com/nort3x/Quanta/blob/java7/Benchmark.txt)
 
 general comparison with `Gson` and `MessagePack` in terms of allocation and runtime
-![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/chart.png "comparison chart")
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java7/chart.png "comparison chart")
 
 speed compared to `ProtocolBuffer` and `MessagePack`  (ns/op)
-![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/comp2.png "comparison chart")
-![comparison-chart](https://github.com/nort3x/Quanta/blob/java9/comp3.png "comparison chart")
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java7/comp2.png "comparison chart")
+![comparison-chart](https://github.com/nort3x/Quanta/blob/java7/comp3.png "comparison chart")
 ## features
 + supports all primitives and their object wrappers automatically
 + supports all primitive arrays and their wrappers automatically

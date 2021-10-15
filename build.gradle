@@ -13,7 +13,7 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 group 'me.nort3x'
-version '1.0.0'
+version '1.0.4-configurations'
 
 
 dependencies {

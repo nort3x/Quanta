@@ -8,6 +8,7 @@ import me.nort3x.quanta.internal.basics.primitives.*;
 import me.nort3x.quanta.internal.basics.primitives.objects.*;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.internal.objects.*;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -88,7 +89,7 @@ public class BinaryHeadStore {
     static final Map<Class<?>, BinaryHead> customTypesBinaryHeads = new ConcurrentHashMap<>();
     static final Map<Class<?>, BinaryHead> customArrayTypesBinaryHeads = new ConcurrentHashMap<>();
 
-    public static BinaryHead getBinaryHeadOf(Class<?> type) {
+    public static BinaryHead getBinaryHeadOf(Class<?> type,QuantaConfiguration configuration) {
 
         if(type.isEnum())
             return enumBinaryHead;
@@ -99,12 +100,12 @@ public class BinaryHeadStore {
         else if (type.isArray()) {
             if(!customArrayTypesBinaryHeads.containsKey(type)){ // todo: figure out this retardness, caused by Recursive map update
                 Class<?> elementType = type.getComponentType();
-                customArrayTypesBinaryHeads.put(type,new CustomArrayTypeConverter(getBinaryHeadOf(elementType), elementType));
+                customArrayTypesBinaryHeads.put(type,new CustomArrayTypeConverter(getBinaryHeadOf(elementType,configuration), elementType));
             }
             return customArrayTypesBinaryHeads.get(type);
         } else {
             if(!customTypesBinaryHeads.containsKey(type)) // todo: figure out this retardness, caused by Recursive map update
-                customTypesBinaryHeads.put(type,new CustomTypeConverter(type));
+                customTypesBinaryHeads.put(type,new CustomTypeConverter(type,configuration));
             return customTypesBinaryHeads.get(type);
         }
     }

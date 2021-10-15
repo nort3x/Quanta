@@ -3,12 +3,13 @@ package me.nort3x.quanta.internal.basics.arrays.duals;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 
 import java.lang.reflect.Field;
 
 public class Float32ArrayBinaryHeadDual implements BinaryHead {
     @Override
-    public void readAndSet(Deserializer ds, Field f, Object o) throws IllegalAccessException {
+    public void readAndSet(Deserializer ds, Field f, Object o, QuantaConfiguration configuration) throws IllegalAccessException {
         float[] arr = ds.readFloat32Array();
         if(arr!=null){
             Float[] array = new Float[arr.length];
@@ -20,7 +21,7 @@ public class Float32ArrayBinaryHeadDual implements BinaryHead {
     }
 
     @Override
-    public void getAndWrite(Serializer sr, Field f, Object o) throws IllegalAccessException {
+    public void getAndWrite(Serializer sr, Field f, Object o,QuantaConfiguration configuration) throws IllegalAccessException {
         Float[] array = (Float[])f.get(o);
         if(array==null){
             sr.writeFloat32Array(null);

@@ -2,6 +2,7 @@ package me.nort3x.quanta.pub.basic;
 
 import me.nort3x.quanta.internal.utils.Converters;
 import me.nort3x.quanta.legacy_support.Function;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Array;
@@ -19,19 +20,19 @@ import java.lang.reflect.Array;
  */
 final public class Deserializer {
 
-    final DeserializationConfig deserializationConfig;
+    final QuantaConfiguration quantaConfiguration;
     ByteArrayInputStream bis;
 
     /**
      * @param arr array containing sequential serialized data
      */
     public Deserializer(byte[] arr) {
-        this(arr, DeserializationConfig.getDefault());
+        this(arr, QuantaConfiguration.getDefault());
     }
 
 
-    public Deserializer(byte[] arr, DeserializationConfig deserializationConfig) {
-        this.deserializationConfig = deserializationConfig;
+    public Deserializer(byte[] arr, QuantaConfiguration quantaConfiguration) {
+        this.quantaConfiguration = quantaConfiguration;
         if (arr == null)
             throw new NullPointerException();
         bis = new ByteArrayInputStream(arr);
@@ -74,7 +75,7 @@ final public class Deserializer {
     public synchronized byte[] readByteArray() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new byte[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new byte[0] : null;
         return readNBytes(i);
     }
 
@@ -109,7 +110,7 @@ final public class Deserializer {
     public synchronized <T> T[] readObjectArray(Function<byte[], T> convertor, Class<T> clazz) {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? (T[]) Array.newInstance(clazz, 0) : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? (T[]) Array.newInstance(clazz, 0) : null;
 
         T[] objects = (T[]) Array.newInstance(clazz, i);
         for (int j = 0; j < i; j++) {
@@ -126,7 +127,7 @@ final public class Deserializer {
     public synchronized int[] readInt32Array() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new int[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new int[0] : null;
 
 
         int[] objects = new int[i];
@@ -153,7 +154,7 @@ final public class Deserializer {
     public synchronized long[] readInt64Array() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new long[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new long[0] : null;
 
         long[] objects = new long[i];
         for (int j = 0; j < i; j++) {
@@ -165,7 +166,7 @@ final public class Deserializer {
     public synchronized boolean[] readBoolArray() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new boolean[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new boolean[0] : null;
 
         boolean[] objects = new boolean[i];
         for (int j = 0; j < i; j++) {
@@ -177,7 +178,7 @@ final public class Deserializer {
     public synchronized float[] readFloat32Array() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new float[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new float[0] : null;
         float[] objects = new float[i];
         for (int j = 0; j < i; j++) {
             objects[j] = readFloat32();
@@ -188,7 +189,7 @@ final public class Deserializer {
     public synchronized double[] readFloat64Array() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new double[0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new double[0] : null;
 
         double[] objects = new double[i];
         for (int j = 0; j < i; j++) {
@@ -200,7 +201,7 @@ final public class Deserializer {
     public synchronized byte[][] readByteArrayArray() {
         int i = readInt32();
         if (i == 0)
-            return deserializationConfig.isReplaceNullWithEmpty() ? new byte[0][0] : null;
+            return quantaConfiguration.isReplaceNullWithEmpty() ? new byte[0][0] : null;
 
         byte[][] objects = new byte[i][];
         for (int j = 0; j < i; j++) {

@@ -2,6 +2,7 @@ package me.nort3x.quanta.internal.interfaces;
 
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 
 import java.lang.reflect.Field;
 
@@ -20,14 +21,14 @@ public interface BinaryHead {
      * @param o instance of object that should be field filled on
      * @throws IllegalAccessException
      */
-    void readAndSet(Deserializer ds, Field f, Object o) throws IllegalAccessException;
+    void readAndSet(Deserializer ds, Field f, Object o, QuantaConfiguration quantaConfiguration) throws IllegalAccessException;
 
     /**
      * @param sr
      * @param f
      * @param o
      * @throws IllegalAccessException
-     * @see BinaryHead#readAndSet(Deserializer, Field, Object)
+     * @see BinaryHead#readAndSet(Deserializer, Field, Object,QuantaConfiguration)
      */
-    void getAndWrite(Serializer sr,Field f,Object o) throws IllegalAccessException;
+    void getAndWrite(Serializer sr,Field f,Object o,QuantaConfiguration quantaConfiguration) throws IllegalAccessException;
 }

@@ -3,7 +3,7 @@ package me.nort3x.quanta.pub.auto;
 import me.nort3x.quanta.internal.auto.BinaryHeadStore;
 import me.nort3x.quanta.internal.auto.DummyClass;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
-import me.nort3x.quanta.pub.basic.DeserializationConfig;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
 import me.nort3x.quanta.pub.interfaces.BinaryConverter;
@@ -22,21 +22,21 @@ public class NestedConvertor<T> implements BinaryConverter<T> {
         }
     }
 
-    private final DeserializationConfig config;
-    public NestedConvertor(Class<T> type, DeserializationConfig deserializationConfig) {
-        typeBH = BinaryHeadStore.getBinaryHeadOf(type);
-        config = deserializationConfig;
+    private final QuantaConfiguration config;
+    public NestedConvertor(Class<T> type, QuantaConfiguration quantaConfiguration) {
+        typeBH = BinaryHeadStore.getBinaryHeadOf(type,quantaConfiguration);
+        config = quantaConfiguration;
     }
 
     public NestedConvertor(Class<T> type) {
-        this(type,DeserializationConfig.getDefault());
+        this(type, QuantaConfiguration.getDefault());
     }
 
     @Override
     public T deserialize(byte[] arr) {
         DummyClass<T> instance = new DummyClass<>();
         try {
-            typeBH.readAndSet(new Deserializer(arr,config),dummyClassField,instance);
+            typeBH.readAndSet(new Deserializer(arr,config),dummyClassField,instance,config);
             return instance.t;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -50,7 +50,7 @@ public class NestedConvertor<T> implements BinaryConverter<T> {
         instance.t = obj;
         try {
             Serializer sr = new Serializer();
-            typeBH.getAndWrite(sr,dummyClassField, instance);
+            typeBH.getAndWrite(sr,dummyClassField, instance,config);
             return sr.toArray();
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);

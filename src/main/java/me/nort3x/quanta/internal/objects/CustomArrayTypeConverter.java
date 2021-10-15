@@ -4,6 +4,7 @@ import me.nort3x.quanta.internal.auto.DummyClass;
 import me.nort3x.quanta.internal.interfaces.BinaryHead;
 import me.nort3x.quanta.pub.basic.Deserializer;
 import me.nort3x.quanta.pub.basic.Serializer;
+import me.nort3x.quanta.pub.config.QuantaConfiguration;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -28,7 +29,7 @@ public class CustomArrayTypeConverter implements BinaryHead {
 
 
     @Override
-    public void readAndSet(Deserializer ds, Field f, Object o) throws IllegalAccessException {
+    public void readAndSet(Deserializer ds, Field f, Object o, QuantaConfiguration configuration) throws IllegalAccessException {
         int numberOfObjects = ds.readInt32();
         if (numberOfObjects == 0)
             return;
@@ -36,14 +37,14 @@ public class CustomArrayTypeConverter implements BinaryHead {
         Object[] arr = (Object[]) Array.newInstance(type, numberOfObjects);
         DummyClass<Object> dummyClass = new DummyClass<>();
         for (int i = 0; i < numberOfObjects; i++) {
-            bh.readAndSet(ds,dummyField,dummyClass);
+            bh.readAndSet(ds,dummyField,dummyClass,configuration);
             arr[i] = dummyClass.t;
         }
         f.set(o,arr);
     }
 
     @Override
-    public void getAndWrite(Serializer sr, Field f, Object o) throws IllegalAccessException {
+    public void getAndWrite(Serializer sr, Field f, Object o,QuantaConfiguration configuration) throws IllegalAccessException {
         Object[] arr = (Object[]) f.get(o);
         if(arr==null) {
             sr.writeInt32(0);
@@ -53,7 +54,7 @@ public class CustomArrayTypeConverter implements BinaryHead {
         DummyClass<Object> dummyClass = new DummyClass<>();
         for (Object value : arr) {
             dummyClass.t = value;
-            bh.getAndWrite(sr, dummyField, dummyClass);
+            bh.getAndWrite(sr, dummyField, dummyClass,configuration);
         }
     }
 }
